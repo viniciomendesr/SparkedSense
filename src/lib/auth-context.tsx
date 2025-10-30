@@ -87,19 +87,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signUp = async (email: string, password: string, name: string) => {
     try {
-      // Use the server API to create user with auto-confirm
-      await authAPI.signUp(email, password, name);
-      
-      // Then sign in
-      await signIn(email, password);
+      // Use Supabase client-side auth directly (no Edge Function needed)
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name: name,
+          },
+          // Auto-confirm since we don't have email configured
+          emailRedirectTo: undefined,
+        },
+      });
+
+      if (error) {
+        // Provide user-friendly error messages
+        if (error.message.includes('already registered')) {
+          throw new Error('This email is already registered. Please sign in instead.');
+        }
+        throw error;
+      }
+
+      // Sign in after successful signup
+      if (data.user) {
+        // For auto-confirmed users, we need to sign in
+        await signIn(email, password);
+      }
     } catch (error: any) {
       console.error('Sign up error:', error);
-      
-      // If user already exists, provide a helpful error message
-      if (error?.message?.includes('already registered')) {
-        throw new Error('This email is already registered. Please sign in instead.');
-      }
-      
       throw error;
     }
   };

@@ -12,6 +12,7 @@ export default function PublicSensorsPage() {
   const [sensors, setSensors] = useState<Sensor[]>([]);
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(0);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     loadPublicSensors();
@@ -45,6 +46,7 @@ export default function PublicSensorsPage() {
   const loadPublicSensors = async () => {
     try {
       setLoading(true);
+      setFetchError(null); // Clear previous errors
       setVisibleCount(0); // Reset progressive rendering
       const data = await publicAPI.listPublicSensors();
       console.log('Public sensors loaded:', data?.length || 0);
@@ -75,6 +77,13 @@ export default function PublicSensorsPage() {
       console.error('Failed to load public sensors:', error);
       setSensors([]);
       setLoading(false);
+      
+      // Set user-friendly error message
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        setFetchError('Edge Function not deployed. Run: supabase functions deploy server');
+      } else {
+        setFetchError('Unable to load public sensors. Please try again later.');
+      }
     }
   };
 
@@ -111,7 +120,29 @@ export default function PublicSensorsPage() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {loading ? (
+        {fetchError ? (
+          <Card className="p-8 bg-card border-border text-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 rounded-lg bg-destructive/20 flex items-center justify-center">
+                <Database className="w-6 h-6 text-destructive" />
+              </div>
+              <div>
+                <h3 className="mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Unable to Load Public Sensors
+                </h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                  {fetchError}
+                </p>
+                <button 
+                  className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm hover:opacity-90"
+                  onClick={loadPublicSensors}
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          </Card>
+        ) : loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <Card key={i} className="p-6 animate-pulse">

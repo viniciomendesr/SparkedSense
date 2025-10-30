@@ -19,6 +19,7 @@ export function HomePage({ onGetStarted }: HomePageProps) {
   const [featuredSensors, setFeaturedSensors] = useState<SensorMetrics[]>([]);
   const [loadingFeatured, setLoadingFeatured] = useState(true);
   const [visibleCount, setVisibleCount] = useState(0);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     loadFeaturedSensors();
@@ -52,6 +53,7 @@ export function HomePage({ onGetStarted }: HomePageProps) {
   const loadFeaturedSensors = async () => {
     try {
       setLoadingFeatured(true);
+      setFetchError(null); // Clear previous errors
       setVisibleCount(0); // Reset progressive rendering
       const data = await publicAPI.getFeaturedSensors();
       console.log('Featured sensors loaded:', data.sensors?.length || 0);
@@ -70,6 +72,13 @@ export function HomePage({ onGetStarted }: HomePageProps) {
       console.error('Failed to load featured sensors:', error);
       setFeaturedSensors([]);
       setLoadingFeatured(false);
+      
+      // Set user-friendly error message
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        setFetchError('Edge Function not deployed. Run: supabase functions deploy server');
+      } else {
+        setFetchError('Unable to load featured sensors. Please try again later.');
+      }
     }
   };
 
@@ -150,7 +159,7 @@ export function HomePage({ onGetStarted }: HomePageProps) {
       </section>
 
       {/* Featured Public Sensors */}
-      {featuredSensors.length > 0 && (
+      {(featuredSensors.length > 0 || fetchError) && (
         <section className="px-4 py-16 border-t border-border">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-between mb-8">
@@ -171,100 +180,128 @@ export function HomePage({ onGetStarted }: HomePageProps) {
               </Button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {loadingFeatured ? (
-                [1, 2, 3].map((i) => (
-                  <Card key={i} className="p-6 animate-pulse">
-                    <div className="h-48 bg-muted rounded mb-4"></div>
-                    <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
-                    <div className="h-3 bg-muted rounded w-1/2 mb-2"></div>
-                    <div className="h-3 bg-muted rounded w-2/3"></div>
-                  </Card>
-                ))
-              ) : (
-                featuredSensors.map((sensor, index) => (
-                  <div
-                    key={sensor.id}
-                    className={`transition-all duration-500 ${
-                      index < visibleCount 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-4'
-                    }`}
-                  >
-                    <Card 
-                      className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-200 cursor-pointer"
-                      onClick={() => navigate(`/audit?sensor=${sensor.id}`)}
-                    >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Activity className="w-5 h-5" style={{ color: 'var(--primary)' }} />
-                        </div>
-                        <div>
-                          <h3 style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '2px' }}>
-                            {sensor.name}
-                          </h3>
-                          <Badge variant="outline" style={{ textTransform: 'uppercase', fontSize: '0.75rem' }}>
-                            {sensor.type}
-                          </Badge>
-                        </div>
-                      </div>
-                      <div className={`w-2 h-2 rounded-full ${
-                        sensor.status === 'active' ? 'bg-success' : 'bg-[#4A4F59]'
-                      }`}></div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between py-2 border-t border-border">
-                        <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                          Public Datasets
-                        </span>
-                        <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
-                          {sensor.publicDatasetsCount}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between py-2 border-t border-border">
-                        <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                          Total Verified
-                        </span>
-                        <div className="flex items-center gap-2">
-                          {(sensor.totalVerified || 0) > 0 && (
-                            <Shield className="w-3 h-3" style={{ color: 'var(--success)' }} />
-                          )}
-                          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
-                            {sensor.totalVerified || 0}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between py-2 border-t border-border">
-                        <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                          Total Readings
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <TrendingUp className="w-3 h-3" style={{ color: 'var(--primary)' }} />
-                          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
-                            {sensor.totalReadingsCount.toLocaleString()}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <Button 
-                      size="sm"
-                      className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/audit?sensor=${sensor.id}`);
-                      }}
-                    >
-                      View & Audit
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Card>
+            {fetchError ? (
+              <Card className="p-8 bg-card border-border text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-destructive/20 flex items-center justify-center">
+                    <Database className="w-6 h-6 text-destructive" />
                   </div>
-                ))
-              )}
-            </div>
+                  <div>
+                    <h3 className="mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                      Unable to Load Featured Sensors
+                    </h3>
+                    <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                      {fetchError}
+                    </p>
+                    <p className="text-xs mb-4" style={{ color: 'var(--text-muted)' }}>
+                      Make sure the Supabase Edge Function is deployed and running.
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={loadFeaturedSensors}
+                    >
+                      Try Again
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {loadingFeatured ? (
+                  [1, 2, 3].map((i) => (
+                    <Card key={i} className="p-6 animate-pulse">
+                      <div className="h-48 bg-muted rounded mb-4"></div>
+                      <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
+                      <div className="h-3 bg-muted rounded w-1/2 mb-2"></div>
+                      <div className="h-3 bg-muted rounded w-2/3"></div>
+                    </Card>
+                  ))
+                ) : (
+                  featuredSensors.map((sensor, index) => (
+                    <div
+                      key={sensor.id}
+                      className={`transition-all duration-500 ${
+                        index < visibleCount 
+                          ? 'opacity-100 translate-y-0' 
+                          : 'opacity-0 translate-y-4'
+                      }`}
+                    >
+                      <Card 
+                        className="p-6 bg-card border-border hover:border-primary/50 transition-all duration-200 cursor-pointer"
+                        onClick={() => navigate(`/audit?sensor=${sensor.id}`)}
+                      >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <Activity className="w-5 h-5" style={{ color: 'var(--primary)' }} />
+                          </div>
+                          <div>
+                            <h3 style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '2px' }}>
+                              {sensor.name}
+                            </h3>
+                            <Badge variant="outline" style={{ textTransform: 'uppercase', fontSize: '0.75rem' }}>
+                              {sensor.type}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className={`w-2 h-2 rounded-full ${
+                          sensor.status === 'active' ? 'bg-success' : 'bg-[#4A4F59]'
+                        }`}></div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between py-2 border-t border-border">
+                          <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                            Public Datasets
+                          </span>
+                          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                            {sensor.publicDatasetsCount}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-t border-border">
+                          <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                            Total Verified
+                          </span>
+                          <div className="flex items-center gap-2">
+                            {(sensor.totalVerified || 0) > 0 && (
+                              <Shield className="w-3 h-3" style={{ color: 'var(--success)' }} />
+                            )}
+                            <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                              {sensor.totalVerified || 0}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-t border-border">
+                          <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                            Total Readings
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <TrendingUp className="w-3 h-3" style={{ color: 'var(--primary)' }} />
+                            <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                              {sensor.totalReadingsCount.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Button 
+                        size="sm"
+                        className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/audit?sensor=${sensor.id}`);
+                        }}
+                      >
+                        View & Audit
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </Card>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
           </div>
         </section>
       )}
