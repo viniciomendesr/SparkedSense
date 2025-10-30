@@ -1209,4 +1209,33 @@ setInterval(async () => {
   }
 }, 5000); // Every 5 seconds
 
-Deno.serve(app.fetch);
+// Serve with proper CORS handling
+Deno.serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, apikey, x-client-info",
+        "Access-Control-Max-Age": "86400",
+      },
+    });
+  }
+
+  // Handle actual request
+  const response = await app.fetch(req);
+  
+  // Ensure CORS headers on response
+  const headers = new Headers(response.headers);
+  headers.set("Access-Control-Allow-Origin", "*");
+  headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization, apikey, x-client-info");
+  
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+});
