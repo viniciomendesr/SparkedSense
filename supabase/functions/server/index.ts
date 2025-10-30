@@ -18,15 +18,26 @@ app.use('*', logger(console.log));
 
 // Enable CORS for all routes and methods
 app.use(
-  "/*",
+  "*",
   cors({
     origin: "*",
-    allowHeaders: ["Content-Type", "Authorization"],
+    allowHeaders: ["Content-Type", "Authorization", "apikey", "x-client-info"],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
     maxAge: 600,
+    credentials: true,
   }),
 );
+
+// Explicit OPTIONS handler for preflight requests
+app.options("*", (c) => {
+  return c.text("", 204, {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, apikey, x-client-info",
+    "Access-Control-Max-Age": "600",
+  });
+});
 
 // Helper to generate IDs
 const generateId = () => crypto.randomUUID();
