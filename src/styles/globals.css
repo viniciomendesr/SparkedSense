@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Sparked Sense Dark Mode Colors */
+  --background: #0C0E12;
+  --foreground: #F3F4F6;
+  --card: #1C212D;
+  --card-foreground: #F3F4F6;
+  --popover: #1C212D;
+  --popover-foreground: #F3F4F6;
+  --primary: #97AAF7;
+  --primary-foreground: #0C0E12;
+  --secondary: #8ABEE3;
+  --secondary-foreground: #0C0E12;
+  --muted: #2B3044;
+  --muted-foreground: #7A818C;
+  --accent: #7CD1CE;
+  --accent-foreground: #0C0E12;
+  --destructive: #E35B5B;
+  --destructive-foreground: #F3F4F6;
+  --border: #3C444E;
+  --input: #2B3044;
+  --ring: #97AAF7;
+  --radius: 0.5rem;
+  
+  /* Status colors */
+  --success: #97AAF7;
+  --error: #E35B5B;
+  --warning: #D1A04D;
+  --info: #8ABEE3;
+  
+  /* Surface variants */
+  --surface: #1C212D;
+  --surface-alt: #2B3044;
+  
+  /* Text variants */
+  --text-primary: #F3F4F6;
+  --text-secondary: #B8BDC7;
+  --text-muted: #7A818C;
+  --text-disabled: #4A4F59;
+  
+  /* Chart colors */
+  --chart-1: #97AAF7;
+  --chart-2: #8ABEE3;
+  --chart-3: #B8C5F9;
+  --chart-4: #D1A04D;
+  --chart-5: #E35B5B;
+  
+  /* Hover and interaction states */
+  --primary-hover: #7B91F5;
+  --primary-active: #6A80E8;
+  
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  button {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  input, textarea, select {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/**
+ * Base typography
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    button {
+      font-size: 1rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input, textarea {
+      font-size: 1rem;
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+    
+    small {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+html {
+  font-size: 16px;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Enhanced hover and active states for primary elements */
+@layer components {
+  .bg-primary:hover {
+    background-color: var(--primary-hover) !important;
+  }
+  
+  .bg-primary:active {
+    background-color: var(--primary-active) !important;
+  }
+  
+  /* Ensure buttons maintain the blue tone family */
+  button[class*="bg-primary"]:not(:disabled):hover {
+    background-color: var(--primary-hover);
+  }
+  
+  button[class*="bg-primary"]:not(:disabled):active {
+    background-color: var(--primary-active);
+    transform: translateY(1px);
+  }
+  
+  /* Interactive elements with primary color */
+  [class*="text-primary"]:hover {
+    color: var(--primary-hover);
+  }
+  
+  /* Border primary elements */
+  [class*="border-primary"]:hover {
+    border-color: var(--primary-hover);
+  }
+  
+  /* Ring focus states */
+  [class*="ring-primary"] {
+    --tw-ring-color: var(--primary);
+  }
+}
