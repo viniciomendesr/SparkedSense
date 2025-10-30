@@ -1,13 +1,13 @@
-import { projectId, publicAnonKey } from '../utils/supabase/info';
-import { Sensor, Reading, Dataset } from './types';
+import { projectId, publicAnonKey } from "../utils/supabase/info";
+import { Sensor, Reading, Dataset } from "./types";
 
 const API_BASE = `https://${projectId}.supabase.co/functions/v1/make-server-4a89e1c9`;
 
 // Helper function to get auth headers
 export const getAuthHeaders = (accessToken?: string) => {
   return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${accessToken || publicAnonKey}`,
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken || publicAnonKey}`,
   };
 };
 
@@ -15,45 +15,51 @@ export const getAuthHeaders = (accessToken?: string) => {
 export const authAPI = {
   signUp: async (email: string, password: string, name: string) => {
     const response = await fetch(`${API_BASE}/auth/signup`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ email, password, name }),
     });
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-      throw new Error(errorData.error || 'Sign up failed');
+      const errorData = await response
+        .json()
+        .catch(() => ({ error: "Unknown error" }));
+      throw new Error(errorData.error || "Sign up failed");
     }
     return response.json();
   },
 
   signIn: async (email: string, password: string) => {
     const response = await fetch(`${API_BASE}/auth/signin`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ email, password }),
     });
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-      throw new Error(errorData.error || 'Sign in failed');
+      const errorData = await response
+        .json()
+        .catch(() => ({ error: "Unknown error" }));
+      throw new Error(errorData.error || "Sign in failed");
     }
     return response.json();
   },
 
   signOut: async (accessToken: string) => {
     const response = await fetch(`${API_BASE}/auth/signout`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-      throw new Error(errorData.error || 'Sign out failed');
+      const errorData = await response
+        .json()
+        .catch(() => ({ error: "Unknown error" }));
+      throw new Error(errorData.error || "Sign out failed");
     }
     return response.json();
   },
 
   getSession: async () => {
     const response = await fetch(`${API_BASE}/auth/session`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(),
     });
     if (!response.ok) {
@@ -67,7 +73,7 @@ export const authAPI = {
 export const sensorAPI = {
   generateClaimToken: async (accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors/generate-claim-token`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -78,14 +84,19 @@ export const sensorAPI = {
     return data.claimToken as string;
   },
 
-  retrieveClaimToken: async (walletPublicKey: string, macAddress: string, devicePublicKey: string, accessToken: string) => {
+  retrieveClaimToken: async (
+    walletPublicKey: string,
+    macAddress: string,
+    devicePublicKey: string,
+    accessToken: string
+  ) => {
     const response = await fetch(`${API_BASE}/sensors/retrieve-claim-token`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
-      body: JSON.stringify({ 
-        wallet_public_key: walletPublicKey, 
+      body: JSON.stringify({
+        wallet_public_key: walletPublicKey,
         mac_address: macAddress,
-        device_public_key: devicePublicKey 
+        device_public_key: devicePublicKey,
       }),
     });
     if (!response.ok) {
@@ -98,7 +109,7 @@ export const sensorAPI = {
 
   list: async (accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -111,7 +122,7 @@ export const sensorAPI = {
 
   get: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -124,7 +135,7 @@ export const sensorAPI = {
 
   create: async (sensor: Partial<Sensor>, accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify(sensor),
     });
@@ -138,7 +149,7 @@ export const sensorAPI = {
 
   update: async (id: string, updates: Partial<Sensor>, accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify(updates),
     });
@@ -152,7 +163,7 @@ export const sensorAPI = {
 
   delete: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/sensors/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -166,10 +177,13 @@ export const sensorAPI = {
 // Reading APIs
 export const readingAPI = {
   list: async (sensorId: string, accessToken: string, limit = 100) => {
-    const response = await fetch(`${API_BASE}/readings/${sensorId}?limit=${limit}`, {
-      method: 'GET',
-      headers: getAuthHeaders(accessToken),
-    });
+    const response = await fetch(
+      `${API_BASE}/readings/${sensorId}?limit=${limit}`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(accessToken),
+      }
+    );
     if (!response.ok) {
       const error = await response.text();
       throw new Error(`Failed to fetch readings: ${error}`);
@@ -180,7 +194,7 @@ export const readingAPI = {
 
   create: async (reading: Partial<Reading>, accessToken: string) => {
     const response = await fetch(`${API_BASE}/readings`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify(reading),
     });
@@ -192,11 +206,19 @@ export const readingAPI = {
     return data.reading as Reading;
   },
 
-  getHistorical: async (sensorId: string, startDate: Date, endDate: Date, accessToken: string) => {
-    const response = await fetch(`${API_BASE}/readings/${sensorId}/historical?start=${startDate.toISOString()}&end=${endDate.toISOString()}`, {
-      method: 'GET',
-      headers: getAuthHeaders(accessToken),
-    });
+  getHistorical: async (
+    sensorId: string,
+    startDate: Date,
+    endDate: Date,
+    accessToken: string
+  ) => {
+    const response = await fetch(
+      `${API_BASE}/readings/${sensorId}/historical?start=${startDate.toISOString()}&end=${endDate.toISOString()}`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(accessToken),
+      }
+    );
     if (!response.ok) {
       const error = await response.text();
       throw new Error(`Failed to fetch historical readings: ${error}`);
@@ -210,7 +232,7 @@ export const readingAPI = {
 export const datasetAPI = {
   list: async (sensorId: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets/${sensorId}`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -223,7 +245,7 @@ export const datasetAPI = {
 
   get: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets/detail/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -236,7 +258,7 @@ export const datasetAPI = {
 
   create: async (dataset: Partial<Dataset>, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify(dataset),
     });
@@ -248,9 +270,13 @@ export const datasetAPI = {
     return data.dataset as Dataset;
   },
 
-  update: async (id: string, updates: Partial<Dataset>, accessToken: string) => {
+  update: async (
+    id: string,
+    updates: Partial<Dataset>,
+    accessToken: string
+  ) => {
     const response = await fetch(`${API_BASE}/datasets/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify(updates),
     });
@@ -264,7 +290,7 @@ export const datasetAPI = {
 
   anchor: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets/${id}/anchor`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -277,7 +303,7 @@ export const datasetAPI = {
 
   incrementAccess: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets/${id}/access`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -289,7 +315,7 @@ export const datasetAPI = {
 
   verifyHash: async (sensorId: string, hash: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/verify/hash`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify({ sensorId, hash }),
     });
@@ -300,9 +326,13 @@ export const datasetAPI = {
     return response.json();
   },
 
-  verifyMerkleRoot: async (sensorId: string, merkleRoot: string, accessToken: string) => {
+  verifyMerkleRoot: async (
+    sensorId: string,
+    merkleRoot: string,
+    accessToken: string
+  ) => {
     const response = await fetch(`${API_BASE}/verify/merkle`, {
-      method: 'POST',
+      method: "POST",
       headers: getAuthHeaders(accessToken),
       body: JSON.stringify({ sensorId, merkleRoot }),
     });
@@ -315,7 +345,7 @@ export const datasetAPI = {
 
   delete: async (id: string, accessToken: string) => {
     const response = await fetch(`${API_BASE}/datasets/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -330,7 +360,7 @@ export const datasetAPI = {
 export const statsAPI = {
   get: async (accessToken: string) => {
     const response = await fetch(`${API_BASE}/stats`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(accessToken),
     });
     if (!response.ok) {
@@ -344,10 +374,13 @@ export const statsAPI = {
 // Merkle Root API
 export const merkleAPI = {
   getHourlyRoot: async (sensorId: string, accessToken: string) => {
-    const response = await fetch(`${API_BASE}/sensors/${sensorId}/hourly-merkle`, {
-      method: 'GET',
-      headers: getAuthHeaders(accessToken),
-    });
+    const response = await fetch(
+      `${API_BASE}/sensors/${sensorId}/hourly-merkle`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(accessToken),
+      }
+    );
     if (!response.ok) {
       const error = await response.text();
       throw new Error(`Failed to fetch hourly Merkle root: ${error}`);
@@ -360,7 +393,7 @@ export const merkleAPI = {
 export const publicAPI = {
   listPublicSensors: async () => {
     const response = await fetch(`${API_BASE}/public/sensors`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(),
     });
     if (!response.ok) {
@@ -373,7 +406,7 @@ export const publicAPI = {
 
   getFeaturedSensors: async () => {
     const response = await fetch(`${API_BASE}/public/sensors/featured`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(),
     });
     if (!response.ok) {
@@ -385,7 +418,7 @@ export const publicAPI = {
 
   getPublicSensor: async (id: string) => {
     const response = await fetch(`${API_BASE}/public/sensors/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(),
     });
     if (!response.ok) {
@@ -398,7 +431,7 @@ export const publicAPI = {
 
   getPublicDatasets: async (sensorId: string) => {
     const response = await fetch(`${API_BASE}/public/datasets/${sensorId}`, {
-      method: 'GET',
+      method: "GET",
       headers: getAuthHeaders(),
     });
     if (!response.ok) {
@@ -410,10 +443,13 @@ export const publicAPI = {
   },
 
   getPublicReadings: async (sensorId: string, limit = 100) => {
-    const response = await fetch(`${API_BASE}/public/readings/${sensorId}?limit=${limit}`, {
-      method: 'GET',
-      headers: getAuthHeaders(),
-    });
+    const response = await fetch(
+      `${API_BASE}/public/readings/${sensorId}?limit=${limit}`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(),
+      }
+    );
     if (!response.ok) {
       const error = await response.text();
       throw new Error(`Failed to fetch public readings: ${error}`);
@@ -423,10 +459,13 @@ export const publicAPI = {
   },
 
   getPublicHourlyMerkle: async (sensorId: string) => {
-    const response = await fetch(`${API_BASE}/public/sensors/${sensorId}/hourly-merkle`, {
-      method: 'GET',
-      headers: getAuthHeaders(),
-    });
+    const response = await fetch(
+      `${API_BASE}/public/sensors/${sensorId}/hourly-merkle`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(),
+      }
+    );
     if (!response.ok) {
       const error = await response.text();
       throw new Error(`Failed to fetch public hourly Merkle root: ${error}`);
