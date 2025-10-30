@@ -2,7 +2,7 @@ import { Hono } from "npm:hono";
 import { cors } from "npm:hono/cors";
 import { logger } from "npm:hono/logger";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.7";
-import * as kv from "./kv_store.tsx";
+import * as kv from "./kv_store.ts";
 import { crypto } from "jsr:@std/crypto@1.0.3";
 
 const app = new Hono();

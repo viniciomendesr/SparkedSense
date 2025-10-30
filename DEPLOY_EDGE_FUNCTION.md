@@ -9,35 +9,44 @@ A rota `POST /sensors` está retornando **404** porque a **Edge Function não es
 ### 1. Instalar Supabase CLI
 
 ```bash
-# Linux/macOS
-curl -fsSL https://raw.githubusercontent.com/supabase/cli/main/install.sh | sh
-
-# Ou via npm
-npm install -g supabase
+# Instalar localmente no projeto (recomendado)
+npm install supabase --save-dev
 ```
 
-### 2. Login no Supabase
+### 2. Obter Access Token
+
+1. Acesse: https://supabase.com/dashboard/account/tokens
+2. Clique em **Generate new token**
+3. Dê um nome (ex: "CLI Deploy")
+4. Copie o token gerado
+
+### 3. Configurar Token
 
 ```bash
-supabase login
+export SUPABASE_ACCESS_TOKEN="seu_token_aqui"
 ```
 
-Isso vai abrir o navegador para você fazer login.
+Ou use diretamente no comando com `--token`
 
-### 3. Link com o Projeto
+### 4. Link com o Projeto
 
 ```bash
 cd /home/nicolasgabriel/Documentos/solanHacka/Sparkedsensemvpv1copy
-supabase link --project-ref djzexivvddzzduetmkel
+npx supabase link --project-ref djzexivvddzzduetmkel
 ```
 
-### 4. Deploy da Edge Function
+### 5. Deploy da Edge Function
 
 ```bash
-supabase functions deploy server
+npx supabase functions deploy server
 ```
 
-### 5. Configurar Variáveis de Ambiente
+**Ou com token direto:**
+```bash
+npx supabase functions deploy server --token seu_token_aqui
+```
+
+### 6. Configurar Variáveis de Ambiente
 
 No Dashboard do Supabase:
 1. Vá em **Edge Functions** → **server** → **Settings**
@@ -45,7 +54,7 @@ No Dashboard do Supabase:
    - `SUPABASE_URL`: https://djzexivvddzzduetmkel.supabase.co
    - `SUPABASE_SERVICE_ROLE_KEY`: (sua service role key)
 
-### 6. Testar a Função
+### 7. Testar a Função
 
 ```bash
 curl -X POST https://djzexivvddzzduetmkel.supabase.co/functions/v1/make-server-4a89e1c9/sensors \
