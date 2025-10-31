@@ -716,7 +716,7 @@ export function HomePage({ onGetStarted }: HomePageProps) {
             size="lg"
             className="bg-primary text-primary-foreground"
           >
-            Connect Wallet
+            Get Started
           </Button>
         </div>
       </section>
