@@ -51,8 +51,6 @@ The system allows anyone to connect IoT devices (Arduino or ESP boards), stream 
 └───────────────────────────────────────────────────────────────┘
 ```
 
-📘 Detailed architecture: [`SYSTEM_ARCHITECTURE.md`](./SYSTEM_ARCHITECTURE.md)
-
 ---
 
 ## ⚙️ Tech Stack
