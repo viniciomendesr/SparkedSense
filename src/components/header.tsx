@@ -73,7 +73,6 @@ export function Header() {
               onClick={() => navigate('/')}
             >
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Wifi className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
                 <h1 className="text-lg tracking-tight" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
