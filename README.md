@@ -1,10 +1,10 @@
-# 🌍 Sparked Sense
+# Sparked Sense
 
 > **An open-source infrastructure connecting Arduino-powered IoT devices, Supabase, and the Solana blockchain — enabling verifiable, auditable, and real-time environmental data.**
 
 ---
 
-## 🚀 Overview
+## Overview
 
 **Sparked Sense** bridges **IoT**, **blockchain**, and **open data** to create a decentralized trust layer for physical-world information.
 
@@ -15,7 +15,7 @@ The system allows anyone to connect IoT devices (Arduino or ESP boards), stream 
 
 ---
 
-## 🧩 Key Features
+## Key Features
 
 - **IoT Integration:** Register and link real Arduino-based devices or mock sensors  
 - **Real-Time Readings:** Stream environmental variables (temperature, humidity, pH, etc.)  
@@ -27,7 +27,7 @@ The system allows anyone to connect IoT devices (Arduino or ESP boards), stream 
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```text
 ┌───────────────────────────────────────────────────────────────┐
@@ -53,7 +53,7 @@ The system allows anyone to connect IoT devices (Arduino or ESP boards), stream 
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |-------|-------------|----------|
@@ -67,25 +67,25 @@ The system allows anyone to connect IoT devices (Arduino or ESP boards), stream 
 
 ---
 
-## 🧠 Core Concepts
+## Core Concepts
 
-### 🛰️ Real vs Mock Sensors
+### Real vs Mock Sensors
 - **Real sensors** transmit signed data directly from physical devices.  
 - **Mock sensors** generate synthetic readings for testing and frontend validation.
 
-### 🧾 Datasets
+### Datasets
 - Datasets aggregate readings and include:
   - Merkle Root hash
   - Solana transaction ID
   - Integrity proof
 
-### 🔍 Public Auditing
+### Public Auditing
 - Public audit pages allow users to validate the authenticity of datasets.  
 - Hourly Merkle proofs confirm real-time data consistency.
 
 ---
 
-## 🧰 Installation Guide
+## Installation Guide
 
 ### 1️⃣ Clone the Repository
 ```bash
@@ -144,7 +144,7 @@ Authorization: Bearer TOKEN
 
 ---
 
-## 🌐 Public API Routes
+## Public API Routes
 
 | Endpoint | Method | Description |
 |-----------|--------|-------------|
@@ -156,7 +156,7 @@ Authorization: Bearer TOKEN
 
 ---
 
-## 🔄 Real-Time Data Flow
+## Real-Time Data Flow
 
 1. Device sends signed JSON payload  
 2. Backend validates and saves it in `sensor_readings`  
@@ -175,7 +175,7 @@ supabase
 
 ---
 
-## 🧪 Mock Data & Testing
+## Mock Data & Testing
 
 Generate mock readings manually for tests:
 ```bash
@@ -188,11 +188,11 @@ Mock sensors refresh automatically every **5 seconds**.
 
 ## 👥 Advisors & Team
 
-### 🧭 Advisors
+### Advisors
 - **Prof. Marcos Zancul** — Scientific Advisor, Manufacturing Systems & Product Development (Poli-USP)  
 - **Otávio Vacari** — Technical Advisor, Computer Engineer (Poli-USP), M.Sc. in Applied Cryptography and Distributed Systems  
 
-### 💡 Core Team
+### Core Team
 | Member | Role | Background |
 |---------|------|-------------|
 | **Vinício Mendes** | Project Creator & Product Lead | Production Engineering student (Poli-USP); Founder of FireTheBox; Researcher in DePIN and Smart Infrastructure |
@@ -202,7 +202,7 @@ Mock sensors refresh automatically every **5 seconds**.
 
 ---
 
-## 🪪 License
+## License
 
 This project is distributed under the **MIT License**.  
 Feel free to use, modify, and contribute under the same principles of transparency and openness.
