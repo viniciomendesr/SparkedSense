@@ -1,6 +1,6 @@
 # Sparked Sense
 
-> **An open-source infrastructure connecting Arduino-powered IoT devices, Supabase, and the Solana blockchain — enabling verifiable, auditable, and real-time environmental data.**
+> **An open infrastructure connecting Arduino-powered IoT devices, Supabase, and the Solana blockchain — enabling verifiable, auditable, and real-time environmental data.**
 
 ---
 
