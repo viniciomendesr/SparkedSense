@@ -126,9 +126,9 @@ export function HomePage({ onGetStarted }: HomePageProps) {
           </div>
           
           <h1 className="mb-6" style={{ fontSize: '2.5rem', fontWeight: 600, lineHeight: '1.2', color: 'var(--text-primary)' }}>
-            Turn Real-World Sensors Into
+            Turn real-world sensors into
             <br />
-            <span className="text-primary">Verifiable Data Streams</span>
+            <span className="text-primary">Verifiable data streams</span>
           </h1>
           
           <p className="mb-8 max-w-2xl mx-auto text-lg" style={{ color: 'var(--text-secondary)', lineHeight: '1.5' }}>
@@ -342,7 +342,7 @@ export function HomePage({ onGetStarted }: HomePageProps) {
       <section className="px-4 py-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-center mb-4" style={{ fontSize: '1.75rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-            An Open Infrastructure for Verifiable Physical Data
+            Open Infrastructure for verifiable physical data
           </h2>
           <p className="text-center mb-12 max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Sparked Sense bridges IoT devices, decentralized networks, and open environmental intelligence systems
