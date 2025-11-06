@@ -234,3 +234,5 @@ We welcome community contributions!
 ---
 
 > _Sparked Sense is an open-source movement to make environmental data verifiable, decentralized, and universally accessible — building the foundation for transparent DePIN ecosystems._
+>
+> 
