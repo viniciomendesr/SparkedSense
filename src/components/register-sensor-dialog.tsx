@@ -120,12 +120,12 @@ export function RegisterSensorDialog({ open, onOpenChange, onRegister }: Registe
   };
 
   const validateDevicePublicKey = (key: string): boolean => {
-    // Real-data flow uses base58 (Solana-style) device keys.
-    // ADR-012 unsigned_dev flow uses raw hex pubkeys (secp256k1, 64 or 66+ hex chars).
-    const base58Regex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+    // The firmware (ESP8266/ESP32) always outputs secp256k1 public keys as hex.
+    // Both 'real' and 'unverified' modes accept hex (64–130 hex chars).
+    // ADR-012: unverified_dev uses hex exclusively; real mode also accepts hex
+    // because the retrieve-claim-token endpoint looks up by public_key hex in `devices`.
     const hexRegex = /^[0-9a-fA-F]{64,130}$/;
-    if (mode === 'unverified') return hexRegex.test(key);
-    return base58Regex.test(key);
+    return hexRegex.test(key);
   };
 
   const handleWalletPublicKeyChange = (value: string) => {
@@ -559,7 +559,7 @@ export function RegisterSensorDialog({ open, onOpenChange, onRegister }: Registe
                         
                         {deviceKeyError && (
                           <p className="text-sm" style={{ color: 'var(--error)' }}>
-                            Invalid public key format. Please enter a valid base58 string.
+                            Invalid public key format. Expected hex string (64 or 130 chars).
                           </p>
                         )}
                       </div>

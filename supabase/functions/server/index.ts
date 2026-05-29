@@ -669,9 +669,10 @@ app.post("/server/sensors/retrieve-claim-token", async (c) => {
       return c.json({ error: 'Invalid Solana wallet public key format' }, 400);
     }
 
-    // Validate Device public key format (base58, 32-44 chars)
-    if (!base58Regex.test(device_public_key)) {
-      return c.json({ error: 'Invalid device public key format' }, 400);
+    // Validate Device public key format: firmware always outputs secp256k1 hex (64–130 chars).
+    const hexRegex = /^[0-9a-fA-F]{64,130}$/;
+    if (!hexRegex.test(device_public_key)) {
+      return c.json({ error: 'Invalid device public key format. Expected hex string (64 or 130 chars).' }, 400);
     }
 
     // Validate MAC address format
@@ -680,13 +681,26 @@ app.post("/server/sensors/retrieve-claim-token", async (c) => {
       return c.json({ error: 'Invalid MAC address format' }, 400);
     }
 
-    // For now, generate a mocked claim token
-    // In a real implementation, this would query a database or blockchain
-    // to retrieve an existing token associated with this wallet, device key, and MAC address
-    const tokenBytes = new Uint8Array(16);
-    crypto.getRandomValues(tokenBytes);
-    const claim_token = `SPARKED-${Array.from(tokenBytes).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase().substring(0, 12)}`;
+    // Look up the claim_token that was assigned to this device during /server/register-device.
+    // The `devices` table stores public_key as hex (matching firmware output).
+    const { data: device, error: deviceError } = await supabase
+      .from('devices')
+      .select('claim_token, mac_address')
+      .eq('public_key', device_public_key)
+      .maybeSingle();
 
+    if (deviceError) {
+      console.error('DB error in retrieve-claim-token:', deviceError);
+      return c.json({ error: 'Database error' }, 500);
+    }
+    if (!device) {
+      return c.json({ error: 'Device not found. Register the device first via the firmware.' }, 404);
+    }
+    if (!device.claim_token) {
+      return c.json({ error: 'Device has no claim token. It may not have completed registration.' }, 404);
+    }
+
+    const claim_token = device.claim_token;
     return c.json({ claim_token });
   } catch (error) {
     console.error('Failed to retrieve claim token:', error);
