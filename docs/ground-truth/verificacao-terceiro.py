@@ -126,6 +126,31 @@ where sr.nft_address = %s and sr.timestamp >= %s and sr.timestamp < %s
 order by sr.timestamp asc, sr.id asc
 """
 
+# O dataset guarda o UUID do sensor; sensor_readings e chaveada por nft_address.
+# A ponte em producao e sensor.claimToken -> devices.claim_token (index.ts:79).
+SQL_RESOLVE_NFT = """
+select d.nft_address, kv.value->>'type'
+from kv_store_4a89e1c9 kv
+join devices d on d.claim_token = kv.value->>'claimToken'
+where kv.key like 'sensor:%%' and kv.value->>'id' = %s
+"""
+
+# Espelho de sensorTypeConfigs (index.ts:70). O hash legado usa config.unit.
+TYPE_CONFIGS = {
+    "temperature": {"unit": "°C", "dataKey": "temperature"},
+    "humidity": {"unit": "%", "dataKey": "humidity"},
+    "ph": {"unit": "pH", "dataKey": "ph_level"},
+    "pressure": {"unit": "hPa", "dataKey": "pressure"},
+    "light": {"unit": "lux", "dataKey": "light_intensity"},
+}
+
+
+def js_number(v):
+    """JSON.stringify serializa 24.0 como '24'; json.dumps, como '24.0'."""
+    if isinstance(v, float) and v.is_integer():
+        return int(v)
+    return v
+
 
 def check_anchored_root(dsn):
     """Teste de compatibilidade: reconstroi a arvore do dataset ancorado e
@@ -142,21 +167,26 @@ def check_anchored_root(dsn):
         cur.execute(SQL_DATASET)
         datasets = cur.fetchall()
         for root, n, sensor_id, t0, t1 in datasets:
-            cur.execute(SQL_LEGACY_READINGS, (sensor_id, t0, t1))
+            cur.execute(SQL_RESOLVE_NFT, (sensor_id,))
+            hit = cur.fetchone()
+            nft = hit[0] if hit else sensor_id
+            cfg = TYPE_CONFIGS.get(hit[1] if hit else "temperature",
+                                   TYPE_CONFIGS["temperature"])
+            cur.execute(SQL_LEGACY_READINGS, (nft, t0, t1))
             rows = cur.fetchall()
             hashes = []
             for rid, ts, data in rows:
-                # forma canonica legada documentada em index.ts linha 169
+                # forma canonica legada de pgReadingToKvFormat (index.ts:169):
+                # JSON.stringify({sensorId, timestamp, value, unit: config.unit}),
+                # com timestamp na serializacao do PostgREST (+00:00, nao Z)
                 value = None
-                for k in ("temperature", "humidity", "ph_level", "value"):
-                    if isinstance(data, dict) and k in data:
-                        value = data[k]
-                        break
+                if isinstance(data, dict):
+                    value = data.get(cfg["dataKey"], data.get("temperature", 0))
                 canonical = canonical_json_ordered(
                     [("sensorId", sensor_id),
-                     ("timestamp", ts.isoformat().replace("+00:00", "Z")),
-                     ("value", value),
-                     ("unit", "")])
+                     ("timestamp", ts.isoformat()),
+                     ("value", js_number(value)),
+                     ("unit", cfg["unit"])])
                 hashes.append(sha256_hex(canonical))
             tree = build_tree(hashes)
             out.append({"dataset_root_gravada": root,
@@ -251,7 +281,10 @@ def mutations(env):
         out.append(("confianca da inferencia", e))
 
     e = json.loads(json.dumps(env))
-    e["time"] = e["time"][:-4] + "9" + e["time"][-3:]
+    # troca o primeiro digito dos milissegundos garantindo mudanca real;
+    # substituir sempre por "9" gerava mutacao nula quando o digito ja era 9
+    ms = "9" if e["time"][-4] != "9" else "8"
+    e["time"] = e["time"][:-4] + ms + e["time"][-3:]
     out.append(("timestamp", e))
 
     e = json.loads(json.dumps(env))

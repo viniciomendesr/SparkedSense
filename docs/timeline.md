@@ -407,6 +407,10 @@ They were written outside version control and existed on one machine only, which
 
 Neither script has been executed yet. No results are committed.
 
+**First execution (17 Aug 2026, later the same day).** `verificacao-terceiro.py` ran against production and surfaced three bugs in itself, all fixed in the same commit that records this: the dataset's `sensorId` (a sensor UUID) was fed to `sensor_readings.nft_address` (hex), returning zero rows, so the "reconstructed" root was the empty-tree hash — the resolution is `sensor.claimToken → devices.claim_token` (`index.ts:79`); the legacy leaf canonical used `unit: ""` and `Z`-suffixed timestamps where production (`pgReadingToKvFormat`, `index.ts:169`) uses the sensor type's unit (`°C`) and PostgREST's `+00:00` serialization, plus JS number formatting (`24`, not `24.0` — 3,984 of the 38,780 readings have integer values); and the timestamp mutation replaced a millisecond digit with `9` unconditionally, a null mutation whenever the digit already was `9` (19 of 200 draws), which counted legitimate signature passes as missed detections.
+
+Results after the fixes: anchored root `6b0c14c7…` reproduced exactly from the 38,780 raw legacy rows (`confere: True`); 100% of sampled envelopes (4,956) verify by a third party with zero operator calls; 800/800 mutations rejected. The measured canonical envelope is **561 bytes** — the "393 bytes" previously cited in the SIICUSP abstract draft does not match and needs correction there. The M6 onboarding metric (8 s median, n=3) is unusable: `devices.created_at` postdates the first reading on two of three nodes, so the delta is negative for one node and 36 days for another.
+
 #### Dead Python dependency removed
 
 `requirements.txt` (flask, redis, python-dotenv, gunicorn, all unpinned) was deleted in `4e1be3a`.
