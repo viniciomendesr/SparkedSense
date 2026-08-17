@@ -1,7 +1,8 @@
-# ADR-012: Solana Memo Program anchoring for dataset Merkle roots
+# ADR-017: Solana Memo Program anchoring for dataset Merkle roots
 
 **Date:** 2026-04-22
 **Status:** Accepted — partial implementation of [ADR-007](007-merkle-tree-before-blockchain.md)
+**Renumbered:** was ADR-012 until 2026-08-17. The number collided with [ADR-012](012-unsigned-dev-sensor-mode.md) (`unsigned_dev` sensor mode). This decision moved because every `ADR-012` mention in source code refers to the sensor mode, not to anchoring. Pre-2026-08-17 documents citing "ADR-012" for anchoring mean this file.
 
 ## Context
 

@@ -12,6 +12,8 @@ Each ADR documents a single architectural decision with its context, rationale, 
 
 ## Index
 
+Numbers are permanent identifiers, so the table is ordered by number and not by date. ADR-017 is dated 2026-04-22 because it was renumbered from 012 to resolve a collision.
+
 | ADR | Title | Status | Decision date | Documented |
 |-----|-------|--------|---------------|------------|
 | [001](001-stack-and-infrastructure.md) | Stack and infrastructure choices | Accepted | 2025-10-30 | 2026-03-10 16:51 |
@@ -26,8 +28,8 @@ Each ADR documents a single architectural decision with its context, rationale, 
 | [010](010-sensor-agnostic-ingestion-envelope.md) | Sensor-agnostic ingestion envelope via CloudEvents + SenML | Accepted | 2026-04-22 | 2026-04-22 |
 | [011](011-unsigned-dev-bypass-for-unported-devices.md) | `unsigned_dev` signature bypass for devices without ported signing pipeline | Accepted | 2026-04-22 | 2026-04-22 |
 | [012](012-unsigned-dev-sensor-mode.md) | `unsigned_dev` sensor mode in dashboard for devices in ADR-011 transition | Superseded by [ADR-014] | 2026-04-23 | 2026-04-23 |
-| [012](012-solana-memo-anchoring.md) | Solana Memo Program anchoring for dataset Merkle roots (ADR-007 partial) | Accepted | 2026-04-22 | 2026-04-22 |
 | [013](013-edge-function-jwt-disabled-for-device-ingestion.md) | Disable Supabase JWT gateway on the `server` Edge Function | Accepted | 2026-04-24 | 2026-04-24 |
 | [014](014-deferred-nft-minting.md) | Deferred NFT minting (`unverified` as the default sensor state) | Accepted | 2026-04-25 | 2026-04-25 |
 | [015](015-unify-ingestion-on-adr-010.md) | Unify ingestion on `/server/reading` (ADR-010 envelope) | Accepted | 2026-04-25 | 2026-04-25 |
 | [016](016-user-paid-mint-on-mainnet.md) | User-paid NFT mint on mainnet (deferred from ADR-014) | Proposed | 2026-04-25 | 2026-04-25 |
+| [017](017-solana-memo-anchoring.md) | Solana Memo Program anchoring for dataset Merkle roots (ADR-007 partial) | Accepted | 2026-04-22 | 2026-04-22 |

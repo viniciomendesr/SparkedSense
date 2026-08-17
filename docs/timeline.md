@@ -347,7 +347,7 @@ Supabase advisor reported 5 ERROR + 4 WARN; migration 004 drove it to 0 ERROR + 
 
 **Contributor:** Vinicio Mendes (with AI assistance — Claude)
 
-### Added ([ADR-012](adr/012-solana-memo-anchoring.md))
+### Added ([ADR-017](adr/017-solana-memo-anchoring.md), numbered 012 at the time)
 - **Real Solana devnet anchoring** for dataset Merkle roots via the Memo Program. Replaces the `setTimeout(3000)` simulation in `POST /server/datasets/:id/anchor`.
 - **Dedicated server keypair** `36QSgfod6aZQTn57dshDdhAxfNaVtpvQzHUQWJUaVUYy` (devnet, funded with 6 SOL). Secret stored exclusively in Supabase secret `SOLANA_SERVER_SECRET_KEY_BASE58`, isolated from personal wallets.
 - **Manual transaction construction** in [`supabase/functions/server/lib/solana.ts`](../supabase/functions/server/lib/solana.ts) — legacy tx format, ed25519 sign via `@noble/curves`, raw JSON-RPC. `@solana/web3.js` was rejected because it triggers `WORKER_RESOURCE_LIMIT` in Supabase Edge Runtime even with lazy imports.
@@ -358,7 +358,7 @@ Supabase advisor reported 5 ERROR + 4 WARN; migration 004 drove it to 0 ERROR + 
 ### Changed (UX)
 - **Removed the "Verify Data Integrity" paste-your-own-hash panel** from owner and public sensor detail pages. The panel was cryptographically correct but UX-zero — nobody arrives at the page with a Merkle root in the clipboard. The audit page retains a technical Merkle-proof view for advanced users.
 - **Added "View onchain anchor" button** per anchored dataset, linking directly to `explorer.solana.com/tx/<sig>?cluster=devnet`. Trust delegates to Solana Explorer rather than to an input field.
-- **Removed the placeholder "View Sensor NFT on Solana Explorer"** button in the owner view — it pointed at a bare `explorer.solana.com/` URL because device-identity NFTs are still simulated. Comment in code references ADR-007/ADR-012 for context.
+- **Removed the placeholder "View Sensor NFT on Solana Explorer"** button in the owner view — it pointed at a bare `explorer.solana.com/` URL because device-identity NFTs are still simulated. Comment in code references ADR-007/ADR-017 (numbered 012 at the time) for context.
 
 ### Fallback + resilience
 - If `SOLANA_SERVER_SECRET_KEY_BASE58` is unset or the anchor tx fails (RPC flake, wallet unfunded, devnet reset), the handler falls back to the legacy simulated flow. The dataset still publishes; the UI surfaces the absence of an anchor tx gracefully (button only renders when `anchorExplorerUrl` is truthy).
@@ -384,12 +384,22 @@ Supabase advisor reported 5 ERROR + 4 WARN; migration 004 drove it to 0 ERROR + 
 1. ~~Fix Merkle tree implementation~~ — done (Phase 8)
 2. ~~Deploy WiFi geolocation provider with Brazil coverage~~ — done (Apple WiFi DB via Cloudflare Worker, env `GEOLOCATE_WORKER_URL` in use)
 3. NFT metadata schema for device identity — deferred (needs Metaplex-capable runtime; `sensor.nftAddress` stays simulated)
-4. ~~Anchoring transaction format~~ — done: Memo Program via [ADR-012](adr/012-solana-memo-anchoring.md)
+4. ~~Anchoring transaction format~~ — done: Memo Program via [ADR-017](adr/017-solana-memo-anchoring.md)
 5. ~~Real Solana devnet integration (dataset anchoring)~~ — done (Phase 15); NFT minting still deferred
 
 **Also pending (post-demo):** ESP32-S3 secp256k1 signing pipeline port (removes [ADR-011](adr/011-unsigned-dev-bypass-for-unported-devices.md) bypass), firmware resilience (WiFi reconnection, watchdog, HTTPS timeout — see audit), backend modularization (`index.ts` split), open source documentation, ESP8266 migration from legacy `POST /sensor-data` to native envelope emission (see ADR-010 item 8 + new [ADR-015](adr/015-unify-ingestion-on-adr-010.md)), server-side downsampling (LTTB) for charts past ~30k readings per fetch (free-tier edge memory is the binding constraint, not CPU), Supabase Auth `leaked_password_protection` toggle via dashboard.
 
-### Phase 17 — Dead Python dependency removed (17 Aug 2026)
+### Phase 17 — Repository hygiene (17 Aug 2026)
+
+#### ADR-012 numbering collision resolved
+
+Two ADRs carried the number 012: `unsigned_dev` sensor mode (2026-04-23) and Solana Memo Program anchoring (2026-04-22). Anchoring was renumbered to [ADR-017](adr/017-solana-memo-anchoring.md); the sensor mode keeps 012.
+
+The date order argued for the opposite move, since anchoring is a day older. Reference count decided it: all 12 `ADR-012` mentions in source code refer to the sensor mode, spread across `esp32s3.ino`, `index.ts`, `api.ts` and four frontend components. Anchoring was cited only from documentation, in four places, all updated. Renumbering the cheaper side left the deployed firmware comment and the backend untouched.
+
+ADR-017 carries a `Renumbered` line in its header so pre-2026-08-17 citations of "ADR-012" for anchoring still resolve. The index in `docs/adr/README.md` is ordered by number, so 017 now sits last despite its April date.
+
+#### Dead Python dependency removed
 
 `requirements.txt` (flask, redis, python-dotenv, gunicorn, all unpinned) was deleted in `4e1be3a`.
 

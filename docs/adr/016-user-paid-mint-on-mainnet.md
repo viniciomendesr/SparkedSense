@@ -34,7 +34,7 @@ When the platform deploys to Solana mainnet, the mint flow shifts to **user-paid
 3. **Backend verifies the mint** by querying the chain (RPC `getAccountInfo` or similar) before flipping the sensor's `mode: 'unverified' → 'real'`. The user-supplied `txSignature` is the proof, but the platform doesn't take their word for it.
 
 4. **The server wallet keeps a residual role** for two narrow operations:
-   - **Dataset anchoring** (ADR-007 / ADR-012). Memo Program writes are platform-paid because they represent the platform's auditability claim, not user ownership.
+   - **Dataset anchoring** (ADR-007 / ADR-017). Memo Program writes are platform-paid because they represent the platform's auditability claim, not user ownership.
    - **Optional sponsored-mint promotion**, e.g., "first 100 mints are free" or "verified-organisation mints are sponsored". This is a strict opt-in; default flow is user-paid.
 
 ### What changes in code at mainnet cutover
