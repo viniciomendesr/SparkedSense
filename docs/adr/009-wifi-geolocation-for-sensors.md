@@ -1,7 +1,7 @@
 # ADR-009: WiFi-based geolocation for physical sensors
 
 **Date:** 2026-03-17 (updated 2026-03-17)
-**Status:** Accepted
+**Status:** Accepted — the 24h location dedup cache described below was removed by [ADR-018](018-remove-device-location-dedup-cache.md) on 2026-08-17. The rest of this decision stands.
 
 ## Context
 

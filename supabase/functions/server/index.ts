@@ -1203,7 +1203,7 @@ app.post("/server/sensors/:id/refresh-location", async (c) => {
 
     const nomRes = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${sensor.latitude}&lon=${sensor.longitude}&zoom=18&addressdetails=1`,
-      { headers: { 'User-Agent': 'edge-tracker/1.0' } },
+      { headers: { 'User-Agent': 'edge-tracker/1.0 (contatoviniciom@gmail.com)' } },
     );
     if (!nomRes.ok) {
       return c.json({ error: 'Reverse geocoding failed' }, 502);
@@ -2725,20 +2725,9 @@ app.post("/server/device-location", async (c) => {
       return c.json({ error: 'Device not found for nftAddress: ' + nftAddress }, 404);
     }
 
-    // Skip if location was updated recently (< 24h ago)
-    if (device.latitude && device.updated_at) {
-      const lastUpdate = new Date(device.updated_at).getTime();
-      const hoursSinceUpdate = (Date.now() - lastUpdate) / (1000 * 60 * 60);
-      if (hoursSinceUpdate < 24) {
-        return c.json({
-          success: true,
-          cached: true,
-          location: device.location,
-          latitude: device.latitude,
-          longitude: device.longitude,
-        });
-      }
-    }
+    // NOTE: 24h location cache removed — devices move between boots and the cache
+    // was returning stale locations. Re-evaluate after adding BSSID fingerprint
+    // comparison to detect actual movement before re-introducing a cache.
 
     // Query Apple WiFi DB via Cloudflare Worker (single batch request)
     const geoWorkerUrl = Deno.env.get('GEOLOCATE_WORKER_URL');

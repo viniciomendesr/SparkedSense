@@ -24,7 +24,7 @@ Numbers are permanent identifiers, so the table is ordered by number and not by 
 | [006](006-cors-header-whitelisting.md) | CORS header whitelisting strategy | Accepted | 2026-03-10 | 2026-03-10 16:52 |
 | [007](007-merkle-tree-before-blockchain.md) | Fix Merkle tree and define on-chain schema before blockchain integration | Accepted | 2026-03-10 | 2026-03-10 17:32 |
 | [008](008-solana-devnet-over-testnet.md) | Solana devnet over testnet for development and academic validation | Accepted | 2026-03-10 | 2026-03-10 17:45 |
-| [009](009-wifi-geolocation-for-sensors.md) | WiFi-based geolocation for physical sensors (Mylnikov API) | Accepted | 2026-03-17 | 2026-03-17 |
+| [009](009-wifi-geolocation-for-sensors.md) | WiFi-based geolocation for physical sensors (Mylnikov API) | Accepted (dedup cache amended by [ADR-018]) | 2026-03-17 | 2026-03-17 |
 | [010](010-sensor-agnostic-ingestion-envelope.md) | Sensor-agnostic ingestion envelope via CloudEvents + SenML | Accepted | 2026-04-22 | 2026-04-22 |
 | [011](011-unsigned-dev-bypass-for-unported-devices.md) | `unsigned_dev` signature bypass for devices without ported signing pipeline | Accepted | 2026-04-22 | 2026-04-22 |
 | [012](012-unsigned-dev-sensor-mode.md) | `unsigned_dev` sensor mode in dashboard for devices in ADR-011 transition | Superseded by [ADR-014] | 2026-04-23 | 2026-04-23 |
@@ -33,3 +33,4 @@ Numbers are permanent identifiers, so the table is ordered by number and not by 
 | [015](015-unify-ingestion-on-adr-010.md) | Unify ingestion on `/server/reading` (ADR-010 envelope) | Accepted | 2026-04-25 | 2026-04-25 |
 | [016](016-user-paid-mint-on-mainnet.md) | User-paid NFT mint on mainnet (deferred from ADR-014) | Proposed | 2026-04-25 | 2026-04-25 |
 | [017](017-solana-memo-anchoring.md) | Solana Memo Program anchoring for dataset Merkle roots (ADR-007 partial) | Accepted | 2026-04-22 | 2026-04-22 |
+| [018](018-remove-device-location-dedup-cache.md) | Remove the 24h device-location dedup cache (amends ADR-009) | Accepted | 2026-08-17 | 2026-08-17 |
