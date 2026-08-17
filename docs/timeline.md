@@ -459,6 +459,72 @@ The legacy ingestion endpoint was retired and the read-side union shipped, closi
   - Tackle the `kv.getByPrefix('sensor:')` scan that dominates TTFB on public handlers (separate ADR candidate).
   - `/public/sensors/featured` at ~3.2s — iterates per public sensor with Merkle build; refactor target.
 
+### Phase 16 addendum — ESP32-S3 (Nó #2) build configuration for on-device KWS (17 Aug 2026)
+
+A flash session for `ESP/esp32s3/esp32s3.ino` surfaced four failures in sequence, all of them Arduino IDE **build configuration** — no firmware source change was involved. Recording the working configuration here because none of it is inferable from the codebase, and the failure modes are misleading.
+
+Board is a Waveshare ESP32-S3 **N16R8** (16MB quad flash, 8MB **octal** PSRAM), selected in the IDE as `ESP32S3 Dev Module`, arduino-esp32 core `3.3.11`.
+
+#### Working configuration
+
+| Tools menu | Value | Why |
+|---|---|---|
+| Port | `/dev/cu.wchusbserial…` | see serial port note below |
+| Flash Size | `16MB (128Mb)` | matches N16R8; esptool confirms `Detected flash size: 16MB` |
+| Partition Scheme | `16M Flash (3MB APP/9.9MB FATFS)` | sketch is ~2.29MB; see below |
+| PSRAM | `OPI PSRAM` | N16R8 PSRAM is octal — `QSPI PSRAM` will not initialise |
+| Flash Mode | `QIO` | flash is quad; only the PSRAM is octal. These are independent |
+
+#### 1. Serial port — duplicate drivers
+
+Both ESP nodes use WCH USB-serial bridges, and **two macOS drivers claim them simultaneously**, producing two device nodes for one physical board:
+
+- Nó #1 (ESP8266, CH340 `1A86:7523`) → `/dev/cu.usbserial-110` (Apple `AppleUSBCHCOM`) and `/dev/cu.wchusbserial110` (WCH `cn.wch.CH34xVCPDriver`)
+- Nó #2 (ESP32-S3, CH343 `1A86:55D3`) → `/dev/cu.usbmodem59090879581` (Apple CDC-ACM) and `/dev/cu.wchusbserial59090879581` (WCH)
+
+The CH343 enumerates as USB CDC-ACM, so the Apple-side node is named `usbmodem…` and looks like an ESP32-S3 native-USB port. It is not — `ioreg` shows a single USB device and zero Espressif VID `303A` devices.
+
+**Always select the `wchusbserial…` node.** On the ESP32-S3 the Apple driver connects and identifies the chip correctly, then fails mid-upload with `Failed to write to target RAM (result was 0107: Checksum error)` — it looks like it works right up until it doesn't. Do not uninstall the WCH driver.
+
+#### 2. `text section exceeds available space in board`
+
+```
+Sketch uses 2288117 bytes (174%) of program storage space. Maximum is 1310720 bytes.
+```
+
+`1310720` = `0x140000`, the app slot of `default.csv` (the 4MB scheme). The IDE was treating a 16MB board as 4MB. `app3M_fat9M_16MB.csv` gives `0x300000` = 3145728 bytes → ~73% used.
+
+Do **not** pick `16M Flash (2MB APP/12.5MB FATFS)` — 2MB is smaller than the sketch and fails identically. `nvs` sits at `0x9000`/`0x5000` in both schemes, so switching does not lose NVS/Preferences data.
+
+**Side effect worth knowing:** while this error persists nothing is flashed, so the board keeps running the *previous* firmware. Symptom during this session was the Serial Monitor showing a Wi-Fi SSID that had already been changed in the source — easily mistaken for a config bug in the firmware.
+
+#### 3. `Failed to allocate TFLite arena (524288 bytes)` + `Failed to run DSP process (-1002)`
+
+Root cause was `PSRAM=disabled` in the build FQBN. With PSRAM off, `MALLOC_CAP_SPIRAM` does not exist in the heap allocator, the patched allocator falls through to internal DRAM, and a 512KB arena cannot fit in the ~250KB of free DRAM. `-1002` is `EIDSP_OUT_OF_MEM` — same cause, not a separate fault.
+
+Verified allocation chain (all correct; only the PSRAM menu setting was wrong):
+
+```
+tflite_micro.h:121      ei_aligned_calloc(16, arena_size)
+ei_aligned_malloc.h:81  ei_calloc(size + hdr_size, 1)
+espressif/ei_classifier_porting.cpp:123  heap_caps_malloc(total, MALLOC_CAP_SPIRAM)
+```
+
+The board's own boot line is the fastest check: `PSRAM livre: 8384768 bytes` = working, `0 bytes` = still disabled.
+
+**Note on GPIO:** enabling OPI PSRAM reserves GPIO 33–37. The I²S mic is on GPIO 4/5/6 (`I2S_SCK_PIN`, `I2S_WS_PIN`, `I2S_SD_PIN`), so there is no conflict — but any future pin assignment must avoid that range.
+
+#### 4. Edge Impulse library patches are not in version control
+
+The KWS build depends on two hand-edits inside `~/Documents/Arduino/libraries/Audio_Classification_-_Keyword_Spotting_-_Demov1_inferencing/`, already noted in the `.ino` header:
+
+- `src/tflite-model/tflite_learn_972566_32.h` — `arena_size` raised to `524288` (default `209478`)
+- `src/edge-impulse-sdk/porting/espressif/ei_classifier_porting.cpp` — `ei_malloc`/`ei_calloc` route allocations `>= 2048` bytes to PSRAM
+
+These live outside the repo and are silently lost on re-importing the Edge Impulse `.zip`. The `espressif` porting file is the one that actually compiles for this target (confirmed via object sizes: espressif `24764` bytes vs. arduino `6088` bytes, the latter being an empty translation unit) — patching `porting/arduino/` instead would have no effect.
+
+**Follow-up:** vendor these two patches into the repo as a `.patch` file (or check in the modified library) so the build is reproducible on another machine.
+
 ### Phase 15 addendum — persist `verify_jwt=false` for device ingestion (24 Apr 2026)
 
 - A redeploy of the `server` Edge Function (rate-limit tuning for the 2026-04-24 Claro demo) silently re-enabled Supabase's gateway-level JWT verification, breaking every device call with `UNAUTHORIZED_NO_AUTH_HEADER`. Root cause: the original deploy used `--no-verify-jwt` as a CLI flag, not a persisted project setting.
