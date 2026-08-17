@@ -33,14 +33,15 @@
 // Arduino core, no extra install).
 #include <uECC.h>
 #include <mbedtls/sha256.h>
+// Credenciais de Wi-Fi. Não versionado — copie `secrets.example.h` para
+// `secrets.h` e preencha com a sua rede antes de compilar.
+#include "secrets.h"
 
 // ============================================================================
 // Config
 // ============================================================================
 
-// Wi-Fi
-static const char* WIFI_SSID     = "MVISIA_2.4GHz";
-static const char* WIFI_PASSWORD = "mvisia2020";
+// Wi-Fi: `WIFI_SSID` e `WIFI_PASSWORD` vêm de `secrets.h` (ver includes acima).
 
 // Endpoint do Sparked Sense (Supabase Edge Function direta, sem Bearer token)
 static const char* INGEST_URL    = "https://djzexivvddzzduetmkel.supabase.co/functions/v1/server/reading";

@@ -6,6 +6,9 @@ supabase/.temp/
 
 .env
 
+# Credenciais de firmware (Wi-Fi). Versionamos só os `secrets.example.h`.
+ESP/*/secrets.h
+
 .claude
 .vscode
 
