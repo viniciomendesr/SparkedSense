@@ -1203,7 +1203,7 @@ app.post("/server/sensors/:id/refresh-location", async (c) => {
 
     const nomRes = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${sensor.latitude}&lon=${sensor.longitude}&zoom=18&addressdetails=1`,
-      { headers: { 'User-Agent': 'edge-tracker/1.0' } },
+      { headers: { 'User-Agent': 'edge-tracker/1.0 (contatoviniciom@gmail.com)' } },
     );
     if (!nomRes.ok) {
       return c.json({ error: 'Reverse geocoding failed' }, 502);
