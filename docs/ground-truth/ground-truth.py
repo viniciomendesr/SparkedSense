@@ -302,7 +302,9 @@ def cmd_analyze(args):
     amb_fp = sum(1 for f in lab
                  if f["block"] in {n for _, _, n in amb}
                  and f["claro"] >= DEPLOYED_THRESHOLD_CLARO)
-    fa_per_min = amb_fp / (amb_s / 60) if amb_s else float("nan")
+    # FA/h e a convencao da literatura de KWS; publicacoes reportam recall a
+    # taxa fixa de falso alarme por hora (0,5/h, 1/h, 0,05/h em condicao estrita).
+    fa_per_hour = amb_fp / (amb_s / 3600) if amb_s else float("nan")
 
     md = []
     md.append("## Avaliacao experimental do classificador acustico embarcado\n")
@@ -319,7 +321,8 @@ def cmd_analyze(args):
     md.append(f"| F1 (regra implantada) | {f_dep:.3f} |")
     md.append(f"| F1 maximo na varredura (threshold {best[0]:.2f}) | {best[3]:.3f} |")
     md.append(f"| Recall por elocucao | {recall_utt:.3f} ({det}/{len(pos_w)}) |")
-    md.append(f"| Falsos positivos por minuto (ruido e fala sem keyword) | {fa_per_min:.2f} |")
+    md.append(f"| Falsos alarmes por hora, FA/h (ruido e fala sem keyword) | {fa_per_hour:.2f} |")
+    md.append(f"| Audio negativo observado | {amb_s/60:.1f} min |")
 
     md.append("\n### Tabela 2. Matriz de confusao por argmax\n")
     md.append("| Rotulo \\ Predito | claro | noise | unknown |")
