@@ -399,6 +399,14 @@ The date order argued for the opposite move, since anchoring is a day older. Ref
 
 ADR-017 carries a `Renumbered` line in its header so pre-2026-08-17 citations of "ADR-012" for anchoring still resolve. The index in `docs/adr/README.md` is ordered by number, so 017 now sits last despite its April date.
 
+#### Evaluation instruments versioned
+
+`docs/ground-truth/` entered the repository: the acoustic ground-truth protocol plus two evaluation scripts, `ground-truth.py` (frame-level capture from Serial with known labels, then confusion matrix, precision/recall/F1 and threshold sweep) and `verificacao-terceiro.py` (seven architecture metrics computed as an independent third party, calling no operator endpoint).
+
+They were written outside version control and existed on one machine only, which is the wrong place for the instruments that produce the numbers cited in academic text. The protocol also records why the 2.995 production inferences cannot be reported as classifier performance: `PUBLISH_THRESHOLD_CLARO = 0.30f` has priority over the argmax, `noise` has no publication path at all, and no ground-truth label exists anywhere in the database.
+
+Neither script has been executed yet. No results are committed.
+
 #### Dead Python dependency removed
 
 `requirements.txt` (flask, redis, python-dotenv, gunicorn, all unpinned) was deleted in `4e1be3a`.
