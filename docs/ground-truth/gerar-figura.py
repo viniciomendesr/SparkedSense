@@ -30,13 +30,13 @@ CAMADAS = [
     ("Ancoragem",   "#E6E3EE", ["Imutável", "Público", "Custo desprezível"],
      [("doc", "Projeção"), ("tree", "Merkle"), ("hash", "Raiz 32 B"), ("link", "On-chain")]),
     ("Borda",       "#DFE7EE", ["Privado por projeto", "Baixo custo", "Independente"],
-     [("mic", "Microfone"), ("wave", "Pré-processo"), ("chip", "Modelo INT8"), ("arrow", "Inferência")]),
+     [("mic", "Sensor"), ("wave", "Pré-processo"), ("chip", "Modelo embarcado"), ("arrow", "Inferência")]),
 ]
 
 PRINCIPIOS = [
     ("Verificabilidade sem", "confiar no operador", "0 chamadas ao operador"),
     ("Interoperabilidade",   "semântica",           "2 modalidades, 8 tipos"),
-    ("Privacidade",          "por projeto",         "nenhum byte de áudio sai do nó"),
+    ("Privacidade",          "por projeto",         "nenhum dado bruto sai do nó"),
     ("Custo de verificação", "desprezível",         "38.780 leituras em 32 bytes"),
     ("Independência",        "entre operadores",    "a chave pública é a identidade"),
 ]
@@ -126,6 +126,9 @@ def build():
         o.append(f'<path d="M{lx:.0f} {ly:.0f} C{lx+40:.0f} {ly:.0f} {px-40} {my:.0f} {px+18} {my:.0f}" '
                  f'fill="none" stroke="{LINE}" stroke-width="1.4"/>')
 
+    o.append(f'<text x="{BAND_X-160}" y="{H-18}" font-size="14" fill="{MUTE}" '
+             f'font-family="Arial, sans-serif">Camadas na mesma ordem de Lin et al. (2025): '
+             f'a camada de governança tokenizada dá lugar à camada de verificação criptográfica.</text>')
     o.append("</svg>")
     return "\n".join(o)
 

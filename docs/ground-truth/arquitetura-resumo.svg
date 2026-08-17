@@ -59,11 +59,11 @@
 <text x="260" y="768" text-anchor="end" class="prop" >Independente</text>
 <text x="320" y="750" class="layer" fill="#1F2328" font-size="30" font-weight="bold" font-family="Charter, Georgia, serif">Borda</text>
 <g transform="translate(520,729)" fill="none" stroke="#1F2328" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="-3.5" y="-9" width="7" height="12" rx="3.5"/><path d="M-7 0a7 7 0 0 0 14 0M0 7v3M-4 10h8"/></g>
-<text x="520" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Microfone</text>
+<text x="520" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Sensor</text>
 <g transform="translate(672,729)" fill="none" stroke="#1F2328" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M-9-3v6M-6-6v12M-3-9v18M0-6v12M3-8v16M6-5v10M9-2v4"/></g>
 <text x="672" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Pré-processo</text>
 <g transform="translate(824,729)" fill="none" stroke="#1F2328" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="-6.5" y="-6.5" width="13" height="13" rx="1.5"/><rect x="-2.5" y="-2.5" width="5" height="5"/><path d="M-3-9v2.5M0-9v2.5M3-9v2.5M-3 6.5V9M0 6.5V9M3 6.5V9M-9-3h2.5M-9 0h2.5M-9 3h2.5M6.5-3H9M6.5 0H9M6.5 3H9"/></g>
-<text x="824" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Modelo INT8</text>
+<text x="824" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Modelo embarcado</text>
 <g transform="translate(976,729)" fill="none" stroke="#1F2328" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="-5" cy="0" r="4.5"/><path d="M0 0h8M5 -3l3 3-3 3"/></g>
 <text x="976" y="775" text-anchor="middle" class="comp" fill="#1F2328" font-size="17.5">Inferência</text>
 <rect x="1372" y="28" width="300" height="794" fill="#F7F8FA" stroke="#A8B0B8"/>
@@ -84,7 +84,7 @@
 <text x="1522" y="390" text-anchor="middle" class="pname" fill="#1F2328" font-size="18" font-family="Charter, Georgia, serif">Privacidade</text>
 <text x="1522" y="413" text-anchor="middle" class="pname" fill="#1F2328" font-size="18" font-family="Charter, Georgia, serif">por projeto</text>
 <line x1="1422" y1="428" x2="1622" y2="428" stroke="#A8B0B8"/>
-<text x="1522" y="451" text-anchor="middle" class="pval" fill="#5A626B" font-size="14">nenhum byte de áudio sai do nó</text>
+<text x="1522" y="451" text-anchor="middle" class="pval" fill="#5A626B" font-size="14">nenhum dado bruto sai do nó</text>
 <path d="M1230 425 C1270 425 1332 415 1390 415" fill="none" stroke="#A8B0B8" stroke-width="1.4"/>
 <rect x="1390" y="496" width="264" height="118" fill="#ffffff" stroke="#A8B0B8"/>
 <text x="1522" y="530" text-anchor="middle" class="pname" fill="#1F2328" font-size="18" font-family="Charter, Georgia, serif">Custo de verificação</text>
@@ -98,4 +98,5 @@
 <line x1="1422" y1="708" x2="1622" y2="708" stroke="#A8B0B8"/>
 <text x="1522" y="731" text-anchor="middle" class="pval" fill="#5A626B" font-size="14">a chave pública é a identidade</text>
 <path d="M1186 741 C1226 741 1332 695 1390 695" fill="none" stroke="#A8B0B8" stroke-width="1.4"/>
+<text x="126" y="862" font-size="14" fill="#5A626B" font-family="Arial, sans-serif">Camadas na mesma ordem de Lin et al. (2025): a camada de governança tokenizada dá lugar à camada de verificação criptográfica.</text>
 </svg>
