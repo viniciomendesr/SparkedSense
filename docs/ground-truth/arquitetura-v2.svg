@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1258" viewBox="0 0 1700 1258" font-family="Helvetica, Arial, sans-serif">
+<rect width="1700" height="1258" fill="#ffffff"/>
+<rect x="14" y="14" width="1672" height="1230" fill="none" stroke="#2b2f36" stroke-width="2"/>
+<text x="46.0" y="74.0" font-size="25" fill="#1f2328" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Arquitetura de referência para compartilhamento verificável de inferências</text>
+<text x="46.0" y="104.0" font-size="25" fill="#1f2328" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">entre nós de borda heterogêneos operados por entidades independentes</text>
+<text x="46.0" y="132.0" font-size="14.5" fill="#5b6270" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">Camadas, propriedades garantidas por camada e princípios que a avaliação empírica sustenta</text>
+<polygon points="328,240 1258,240 1186,374 256,374" fill="#f2e2ea" stroke="#3f434a" stroke-width="1.5"/>
+<text x="328.7" y="302.0" font-size="25" fill="#8e3f59" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Aplicação</text>
+<text x="300.6" y="358.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="0.92">quem consome a inferência não precisa ser quem opera o nó</text>
+<g><rect x="615.1" y="280.0" width="30" height="24" rx="2" fill="none" stroke="#8e3f59" stroke-width="1.9"/><path d="M621.0597014925373,298 L621.0597014925373,290 M627.0597014925373,298 L627.0597014925373,285 M633.0597014925373,298 L633.0597014925373,288 M639.0597014925373,298 L639.0597014925373,283" fill="none" stroke="#8e3f59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="608.6" y="332.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Painel</text>
+<g><circle cx="790.1" cy="289.0" r="10" fill="none" stroke="#8e3f59" stroke-width="1.9"/><path d="M797.0597014925373,296 L807.0597014925373,306" fill="none" stroke="#8e3f59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="771.6" y="332.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Auditoria externa</text>
+<g><path d="M952.0597014925373,277 L952.0597014925373,286 M960.0597014925373,277 L960.0597014925373,286" fill="none" stroke="#8e3f59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><rect x="947.1" y="286.0" width="18" height="11" rx="2" fill="none" stroke="#8e3f59" stroke-width="1.9"/><path d="M956.0597014925373,297 L956.0597014925373,307" fill="none" stroke="#8e3f59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="934.6" y="332.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Integração</text>
+<g><circle cx="1119.1" cy="286.0" r="7" fill="none" stroke="#8e3f59" stroke-width="1.9"/><path d="M1107.0597014925374,306 q12,-14 24,0" fill="none" stroke="#8e3f59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1097.6" y="332.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Operador terceiro</text>
+<text x="287.3" y="286.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Interoperável</text>
+<text x="274.4" y="310.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Multi-operador</text>
+<text x="261.5" y="334.0" font-size="13" fill="#8e3f59" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Agnóstica de modalidade</text>
+<polygon points="306,398 1236,398 1164,532 234,532" fill="#f6ece0" stroke="#3f434a" stroke-width="1.5"/>
+<text x="306.7" y="460.0" font-size="25" fill="#8a551f" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Verificação</text>
+<text x="278.6" y="516.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="0.92">o operador reverifica, mas não pode forjar: não detém chave privada de nó algum</text>
+<g><circle cx="601.1" cy="450.0" r="7.5" fill="none" stroke="#8a551f" stroke-width="1.9"/><path d="M607.0597014925373,450 L624.0597014925373,450 M624.0597014925373,450 L624.0597014925373,457 M618.0597014925373,450 L618.0597014925373,455" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="586.6" y="490.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Chave pública</text>
+<g><path d="M758.0597014925373,463 L763.0597014925373,448 L775.0597014925373,436 L783.0597014925373,444 L771.0597014925373,456 Z" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M763.0597014925373,448 L771.0597014925373,456" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="749.6" y="490.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Assinatura ECDSA</text>
+<g><path d="M934.0597014925373,436 L946.0597014925373,441 L946.0597014925373,452 q0,9 -12,12 q-12,-3 -12,-12 L922.0597014925373,441 Z" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M929.0597014925373,449 L933.0597014925373,454 L940.0597014925373,444" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="912.6" y="490.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Prova de inclusão</text>
+<g><rect x="1082.1" y="439.0" width="30" height="22" rx="3" fill="none" stroke="#8a551f" stroke-width="1.9"/><circle cx="1091.1" cy="447.0" r="4.5" fill="none" stroke="#8a551f" stroke-width="1.9"/><path d="M1085.0597014925374,457 q6,-7 12,0" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M1100.0597014925374,446 L1108.0597014925374,446 M1100.0597014925374,452 L1108.0597014925374,452" fill="none" stroke="#8a551f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1075.6" y="490.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Identidade do nó</text>
+<text x="265.3" y="444.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Integridade</text>
+<text x="252.4" y="468.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Autenticidade</text>
+<text x="239.5" y="492.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Não repúdio</text>
+<text x="226.6" y="516.0" font-size="13" fill="#8a551f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Verificável por terceiro</text>
+<polygon points="284,556 1214,556 1142,690 212,690" fill="#e2efe8" stroke="#3f434a" stroke-width="1.5"/>
+<text x="284.7" y="618.0" font-size="25" fill="#2f6b50" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Dados</text>
+<text x="256.6" y="674.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="0.92">o canônico assinado permanece reconstruível a partir do que foi armazenado</text>
+<g><rect x="571.1" y="597.0" width="30" height="22" rx="2" fill="none" stroke="#2f6b50" stroke-width="1.9"/><path d="M571.0597014925373,597 L586.0597014925373,610 L601.0597014925373,597" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="564.6" y="648.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Envelope CloudEvents</text>
+<g><path d="M745.0597014925373,594 q-6,0 -6,7 t-5,7 q5,0 5,7 t6,7" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M753.0597014925373,594 q6,0 6,7 t5,7 q-5,0 -5,7 t-6,7" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="727.6" y="648.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">8 schemas de tipo</text>
+<g><rect x="897.1" y="596.0" width="30" height="24" rx="2" fill="none" stroke="#2f6b50" stroke-width="1.9"/><path d="M897.0597014925373,604 L927.0597014925373,604 M897.0597014925373,612 L927.0597014925373,612 M909.0597014925373,596 L909.0597014925373,620" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="890.6" y="648.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">SenML</text>
+<g><ellipse cx="1075.0597014925374" cy="597" rx="13" ry="5" fill="none" stroke="#2f6b50" stroke-width="1.9"/><path d="M1062.0597014925374,597 L1062.0597014925374,619 a13,5 0 0,0 26,0 L1088.0597014925374,597" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M1062.0597014925374,608 a13,5 0 0,0 26,0" fill="none" stroke="#2f6b50" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1053.6" y="648.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Persistência canônica</text>
+<text x="243.3" y="602.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Tipado</text>
+<text x="230.4" y="626.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Canônico</text>
+<text x="217.5" y="650.0" font-size="13" fill="#2f6b50" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Reconstruível</text>
+<polygon points="262,714 1192,714 1120,848 190,848" fill="#e7e3f1" stroke="#3f434a" stroke-width="1.5"/>
+<text x="262.7" y="776.0" font-size="25" fill="#544392" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Ancoragem</text>
+<text x="234.6" y="832.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="0.92">38.780 leituras condensadas em uma raiz; prova de inclusão de 16 passos</text>
+<g><path d="M554.0597014925373,752 L568.0597014925373,752 L575.0597014925373,759 L575.0597014925373,780 L554.0597014925373,780 Z" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M568.0597014925373,752 L568.0597014925373,759 L575.0597014925373,759" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M559.0597014925373,765 L570.0597014925373,765" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M559.0597014925373,770 L570.0597014925373,770" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M559.0597014925373,775 L570.0597014925373,775" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="542.6" y="806.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Projeção canônica</text>
+<g><circle cx="727.1" cy="754.0" r="4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="717.1" cy="767.0" r="4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="737.1" cy="767.0" r="4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="711.1" cy="780.0" r="3.4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="723.1" cy="780.0" r="3.4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="731.1" cy="780.0" r="3.4" fill="none" stroke="#544392" stroke-width="1.9"/><circle cx="743.1" cy="780.0" r="3.4" fill="none" stroke="#544392" stroke-width="1.9"/><path d="M724.5597014925373,757 L719.0597014925373,764 M729.5597014925373,757 L735.0597014925373,764" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M715.0597014925373,770.5 L712.0597014925373,777 M719.0597014925373,770.5 L722.0597014925373,777" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M735.0597014925373,770.5 L732.0597014925373,777 M739.0597014925373,770.5 L742.0597014925373,777" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="705.6" y="806.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Árvore de Merkle</text>
+<g><path d="M882.0597014925373,753 L878.0597014925373,779 M894.0597014925373,753 L890.0597014925373,779" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M876.0597014925373,762 L902.0597014925373,762 M875.0597014925373,771 L901.0597014925373,771" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="868.6" y="806.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Raiz de 32 bytes</text>
+<g><rect x="1037.1" y="758.0" width="14" height="16" rx="4" fill="none" stroke="#544392" stroke-width="1.9"/><rect x="1055.1" y="758.0" width="14" height="16" rx="4" fill="none" stroke="#544392" stroke-width="1.9"/><path d="M1051.0597014925374,766 L1055.0597014925374,766" fill="none" stroke="#544392" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1031.6" y="806.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Registro on-chain</text>
+<text x="221.3" y="760.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Imutável</text>
+<text x="208.4" y="784.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Público</text>
+<text x="195.5" y="808.0" font-size="13" fill="#544392" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Custo desprezível</text>
+<polygon points="240,872 1170,872 1098,1006 168,1006" fill="#dfebf4" stroke="#3f434a" stroke-width="1.5"/>
+<text x="240.7" y="934.0" font-size="25" fill="#2c5b7f" font-weight="bold" text-anchor="start" letter-spacing="0" opacity="1">Borda</text>
+<text x="212.6" y="990.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="0.92">o dado bruto não deixa o dispositivo</text>
+<g><rect x="536.1" y="910.0" width="12" height="18" rx="6" fill="none" stroke="#2c5b7f" stroke-width="1.9"/><path d="M531.0597014925373,922 a11,11 0 0,0 22,0" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M542.0597014925373,933 L542.0597014925373,939" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M535.0597014925373,939 L549.0597014925373,939" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="520.6" y="964.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Sensor ou microfone</text>
+<g><path d="M689.1,924.0 M689.1,919 L689.1,929 M694.5,911 L694.5,937 M699.9,917 L699.9,931 M705.3,908 L705.3,940 M710.7,920 L710.7,928 M716.1,914 L716.1,934 M721.5,918 L721.5,930" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="683.6" y="964.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Pré-processamento</text>
+<g><rect x="857.1" y="913.0" width="22" height="22" rx="3" fill="none" stroke="#2c5b7f" stroke-width="1.9"/><rect x="863.6" y="919.5" width="9" height="9" rx="1" fill="none" stroke="#2c5b7f" stroke-width="1.9"/><path d="M862.0597014925373,913 L862.0597014925373,908" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M862.0597014925373,935 L862.0597014925373,940" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M857.0597014925373,918 L852.0597014925373,918" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M879.0597014925373,918 L884.0597014925373,918" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M868.0597014925373,913 L868.0597014925373,908" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M868.0597014925373,935 L868.0597014925373,940" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M857.0597014925373,924 L852.0597014925373,924" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M879.0597014925373,924 L884.0597014925373,924" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M874.0597014925373,913 L874.0597014925373,908" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M874.0597014925373,935 L874.0597014925373,940" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M857.0597014925373,930 L852.0597014925373,930" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M879.0597014925373,930 L884.0597014925373,930" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="846.6" y="964.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Modelo embarcado</text>
+<g><circle cx="1025.1" cy="924.0" r="7" fill="none" stroke="#2c5b7f" stroke-width="1.9"/><path d="M1033.0597014925374,924 L1047.0597014925374,924" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M1041.0597014925374,919 L1047.0597014925374,924 L1041.0597014925374,929" fill="none" stroke="#2c5b7f" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1009.6" y="964.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Inferência</text>
+<text x="199.3" y="918.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Privado por projeto</text>
+<text x="186.4" y="942.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Baixo custo</text>
+<text x="173.5" y="966.0" font-size="13" fill="#2c5b7f" font-weight="normal" text-anchor="end" letter-spacing="0" opacity="0.9">Independente</text>
+<rect x="1314" y="194" width="356" height="822.0" fill="#f4f6f8" stroke="#3f434a" stroke-width="1.4"/>
+<text x="1492.0" y="228.0" font-size="13" fill="#1f2328" font-weight="bold" text-anchor="middle" letter-spacing="1.6" opacity="1">PRINCÍPIOS SUSTENTADOS</text>
+<rect x="1332" y="252.0" width="320" height="108" fill="#ffffff" stroke="#3f434a" stroke-width="1.3"/>
+<text x="1492.0" y="286.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Verificabilidade sem</text>
+<text x="1492.0" y="308.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">confiar no operador</text>
+<line x1="1402" y1="320.0" x2="1582" y2="320.0" stroke="#c3cad3" stroke-width="1"/>
+<text x="1492.0" y="341.0" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">0 chamadas ao operador</text>
+<rect x="1332" y="410.5" width="320" height="108" fill="#ffffff" stroke="#3f434a" stroke-width="1.3"/>
+<text x="1492.0" y="444.5" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Interoperabilidade</text>
+<text x="1492.0" y="466.5" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">semântica</text>
+<line x1="1402" y1="478.5" x2="1582" y2="478.5" stroke="#c3cad3" stroke-width="1"/>
+<text x="1492.0" y="499.5" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">2 modalidades, 8 tipos registrados</text>
+<rect x="1332" y="569.0" width="320" height="108" fill="#ffffff" stroke="#3f434a" stroke-width="1.3"/>
+<text x="1492.0" y="603.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Privacidade</text>
+<text x="1492.0" y="625.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">por projeto</text>
+<line x1="1402" y1="637.0" x2="1582" y2="637.0" stroke="#c3cad3" stroke-width="1"/>
+<text x="1492.0" y="658.0" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">nenhum byte de áudio transmitido</text>
+<rect x="1332" y="727.5" width="320" height="108" fill="#ffffff" stroke="#3f434a" stroke-width="1.3"/>
+<text x="1492.0" y="761.5" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Custo de verificação</text>
+<text x="1492.0" y="783.5" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">desprezível</text>
+<line x1="1402" y1="795.5" x2="1582" y2="795.5" stroke="#c3cad3" stroke-width="1"/>
+<text x="1492.0" y="816.5" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">38.780 leituras em 32 bytes</text>
+<rect x="1332" y="886.0" width="320" height="108" fill="#ffffff" stroke="#3f434a" stroke-width="1.3"/>
+<text x="1492.0" y="920.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">Independência</text>
+<text x="1492.0" y="942.0" font-size="16.5" fill="#1f2328" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">entre operadores</text>
+<line x1="1402" y1="954.0" x2="1582" y2="954.0" stroke="#c3cad3" stroke-width="1"/>
+<text x="1492.0" y="975.0" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="middle" letter-spacing="0" opacity="1">a chave pública é a identidade</text>
+<path d="M1226.0,307.0 C1273.3,307.0 1273.3,464.5 1312.0,464.5" fill="none" stroke="#8e3f59" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="464.5" r="3" fill="#8e3f59"/>
+<path d="M1226.0,307.0 C1273.3,307.0 1273.3,940.0 1312.0,940.0" fill="none" stroke="#8e3f59" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="940.0" r="3" fill="#8e3f59"/>
+<path d="M1204.0,465.0 C1263.4,465.0 1263.4,306.0 1312.0,306.0" fill="none" stroke="#8a551f" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="306.0" r="3" fill="#8a551f"/>
+<path d="M1182.0,623.0 C1253.5,623.0 1253.5,464.5 1312.0,464.5" fill="none" stroke="#2f6b50" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="464.5" r="3" fill="#2f6b50"/>
+<path d="M1160.0,781.0 C1243.6,781.0 1243.6,781.5 1312.0,781.5" fill="none" stroke="#544392" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="781.5" r="3" fill="#544392"/>
+<path d="M1160.0,781.0 C1243.6,781.0 1243.6,306.0 1312.0,306.0" fill="none" stroke="#544392" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="306.0" r="3" fill="#544392"/>
+<path d="M1138.0,939.0 C1233.7,939.0 1233.7,623.0 1312.0,623.0" fill="none" stroke="#2c5b7f" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="623.0" r="3" fill="#2c5b7f"/>
+<path d="M1138.0,939.0 C1233.7,939.0 1233.7,940.0 1312.0,940.0" fill="none" stroke="#2c5b7f" stroke-width="2" opacity="0.85"/>
+<circle cx="1312.0" cy="940.0" r="3" fill="#2c5b7f"/>
+<circle cx="1117.9" cy="902.0" r="12.5" fill="#a15c07"/>
+<text x="1117.9" y="907.0" font-size="13.5" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">A</text>
+<circle cx="1073.9" cy="902.0" r="12.5" fill="#a15c07"/>
+<text x="1073.9" y="907.0" font-size="13.5" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">B</text>
+<circle cx="1183.9" cy="428.0" r="12.5" fill="#a15c07"/>
+<text x="1183.9" y="433.0" font-size="13.5" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">C</text>
+<text x="1314.0" y="1060.5" font-size="12" fill="#a15c07" font-weight="bold" text-anchor="start" letter-spacing="1.4" opacity="1">ACHADOS DO CICLO DE BUSCA</text>
+<circle cx="1323" cy="1082.0" r="9" fill="#a15c07"/>
+<text x="1323.0" y="1086.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">A</text>
+<text x="1339.0" y="1086.5" font-size="12.5" fill="#a15c07" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">plataforma: drones → nós embarcados fixos</text>
+<circle cx="1323" cy="1107.0" r="9" fill="#a15c07"/>
+<text x="1323.0" y="1111.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">B</text>
+<text x="1339.0" y="1111.5" font-size="12.5" fill="#a15c07" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">caso de uso: dado ambiental → inferência</text>
+<circle cx="1323" cy="1132.0" r="9" fill="#a15c07"/>
+<text x="1323.0" y="1136.0" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle" letter-spacing="0" opacity="1">C</text>
+<text x="1339.0" y="1136.5" font-size="12.5" fill="#a15c07" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">enquadramento: DePIN tokenizado → cyber-físico</text>
+<line x1="46" y1="1040" x2="1170" y2="1040" stroke="#a4161a" stroke-width="1.6"/>
+<text x="46.0" y="1068.0" font-size="12.5" fill="#a4161a" font-weight="bold" text-anchor="start" letter-spacing="1.8" opacity="1">LACUNA ABERTA</text>
+<text x="46.0" y="1094.0" font-size="13.5" fill="#1f2328" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">A assinatura compromete o envelope integral; a raiz ancorada compromete uma projeção de cinco campos.</text>
+<text x="46.0" y="1116.0" font-size="13.5" fill="#5b6270" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">As duas provas não compõem: não há cadeia única ligando um envelope assinado ao conjunto ancorado.</text>
+<line x1="46" y1="1174" x2="1654" y2="1174" stroke="#c3cad3" stroke-width="1"/>
+<text x="46.0" y="1200.0" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">Estrutura em camadas apresentada na mesma gramática de Lin et al. (2025), para tornar legíveis as substituições: a camada de governança tokenizada dá lugar à camada de verificação criptográfica.</text>
+<text x="46.0" y="1222.0" font-size="12.5" fill="#5b6270" font-weight="normal" text-anchor="start" letter-spacing="0" opacity="1">Propriedades da camada de verificação conforme os requisitos de proveniência segura de Suhail et al. (2016). Valores de operação medidos no banco de produção em 17/08/2026.</text>
+</svg>

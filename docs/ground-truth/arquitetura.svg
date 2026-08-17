@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1150" viewBox="0 0 1520 1150" font-family="Helvetica, Arial, sans-serif">
+<rect width="1520" height="1150" fill="#ffffff"/>
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b7280"/></marker><marker id="arA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1e3a5f"/></marker></defs>
+<text x="60" y="58" font-size="27" fill="#111827" font-weight="bold" text-anchor="start" letter-spacing="0">Arquitetura de referência para geração e compartilhamento</text>
+<text x="60" y="90" font-size="27" fill="#111827" font-weight="bold" text-anchor="start" letter-spacing="0">de inferências verificáveis entre nós de borda independentes</text>
+<text x="60" y="118" font-size="15.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">Estado após três ondas de revisão bibliográfica e dois ciclos de construção e teste em campo</text>
+<rect x="60" y="156" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="188" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">1  NÓ DE BORDA  ·  heterogêneo por projeto</text>
+<text x="82" y="218" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">sensor ou microfone  →  pré-processamento  →  modelo embarcado quantizado  →  inferência</text>
+<text x="82" y="242" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">o dado bruto não deixa o dispositivo; o que sai é o resultado da inferência</text>
+<line x1="460.0" y1="268" x2="460.0" y2="287" stroke="#6b7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<rect x="60" y="290" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="322" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">2  ENVELOPE SEMÂNTICO COMUM</text>
+<text x="82" y="352" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">CloudEvents 1.0 + SenML.  specversion · id · source=spark:device:&lt;pubkey&gt; · type · time · data</text>
+<text x="82" y="376" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">8 tipos de payload registrados; tipo não registrado passa como opaco, sem alterar o backend</text>
+<line x1="460.0" y1="402" x2="460.0" y2="421" stroke="#6b7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<rect x="60" y="424" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="456" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">3  ASSINATURA NO PRÓPRIO DISPOSITIVO</text>
+<text x="82" y="486" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">ECDSA secp256k1 sobre SHA-256 do JSON canônico do envelope, menos o campo signature</text>
+<text x="82" y="510" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">a chave privada nunca deixa o chip; a pública é o próprio identificador do nó</text>
+<line x1="460.0" y1="536" x2="460.0" y2="555" stroke="#6b7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<rect x="60" y="558" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="590" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">4  INGESTÃO VERIFICANTE  ·  não é autoridade de confiança</text>
+<text x="82" y="620" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">valida a forma do envelope, valida o schema do tipo, reverifica a assinatura</text>
+<text x="82" y="644" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">rejeita o que não confere; não pode forjar, porque não detém chave privada de nó algum</text>
+<line x1="460.0" y1="670" x2="460.0" y2="689" stroke="#6b7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<rect x="60" y="692" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="724" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">5  PERSISTÊNCIA CANÔNICA</text>
+<text x="82" y="754" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">armazena o envelope de modo que o canônico assinado seja reconstruível por qualquer um</text>
+<text x="82" y="778" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">condição necessária para a verificação independente da camada 6</text>
+<line x1="460.0" y1="804" x2="460.0" y2="823" stroke="#6b7280" stroke-width="1.6" marker-end="url(#ar)"/>
+<rect x="60" y="826" width="800" height="112" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="82" y="858" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">6  AGREGAÇÃO E ANCORAGEM</text>
+<text x="82" y="888" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">projeção canônica por leitura  →  árvore de Merkle binária  →  raiz  →  registro on-chain</text>
+<text x="82" y="912" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">38.780 leituras condensadas em 32 bytes; prova de inclusão de 16 passos</text>
+<line x1="920" y1="150" x2="920" y2="948" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="910" y="146" font-size="13" fill="#6b7280" text-anchor="end" letter-spacing="1.2">DOMÍNIO DO OPERADOR</text>
+<text x="932" y="146" font-size="13" fill="#6b7280" letter-spacing="1.2">TERCEIRO INDEPENDENTE</text>
+<rect x="950" y="290" width="510" height="430" rx="8" fill="#ffffff" stroke="#1e3a5f" stroke-width="1.8"/>
+<text x="972" y="324" font-size="18.5" fill="#1e3a5f" font-weight="bold" text-anchor="start" letter-spacing="0">VERIFICADOR EXTERNO</text>
+<text x="972" y="350" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">não possui credencial da plataforma</text>
+<text x="972" y="394" font-size="16" fill="#111827" font-weight="bold" text-anchor="start" letter-spacing="0">A.  Autenticidade e integridade</text>
+<text x="972" y="420" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">insumos: envelope armazenado + chave</text>
+<text x="972" y="443" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">pública extraída do próprio source</text>
+<text x="972" y="466" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">chamadas ao operador: 0</text>
+<text x="972" y="489" font-size="14" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">medido: 6/6 envelopes reais verificados,</text>
+<text x="972" y="512" font-size="14" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">24/24 adulterações rejeitadas</text>
+<text x="972" y="566" font-size="16" fill="#111827" font-weight="bold" text-anchor="start" letter-spacing="0">B.  Inclusão no conjunto ancorado</text>
+<text x="972" y="592" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">insumos: raiz on-chain + prova de inclusão</text>
+<text x="972" y="615" font-size="14" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">chamadas ao operador: 1</text>
+<text x="972" y="638" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">as folhas não estão on-chain, então o</text>
+<text x="972" y="661" font-size="14" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">conjunto ainda vem da API do operador</text>
+<line x1="868" y1="480" x2="942" y2="410" stroke="#1e3a5f" stroke-width="1.8" marker-end="url(#arA)"/>
+<line x1="868" y1="882" x2="942" y2="590" stroke="#1e3a5f" stroke-width="1.8" marker-end="url(#arA)"/>
+<text x="945" y="762" font-size="13" fill="#b45309" font-weight="bold" text-anchor="start" letter-spacing="0.8">ACHADOS DO CICLO DE BUSCA QUE REDEFINIRAM A INSTANCIAÇÃO</text>
+<circle cx="960" cy="806" r="15" fill="#b45309"/>
+<text x="960" y="812" font-size="15" fill="#ffffff" font-weight="bold" text-anchor="middle">A</text>
+<text x="986" y="812" font-size="14.5" fill="#b45309" font-weight="normal" text-anchor="start" letter-spacing="0">plataforma: drones → nós embarcados fixos</text>
+<circle cx="960" cy="844" r="15" fill="#b45309"/>
+<text x="960" y="850" font-size="15" fill="#ffffff" font-weight="bold" text-anchor="middle">B</text>
+<text x="986" y="850" font-size="14.5" fill="#b45309" font-weight="normal" text-anchor="start" letter-spacing="0">caso de uso: dado ambiental → inferência</text>
+<circle cx="960" cy="882" r="15" fill="#b45309"/>
+<text x="960" y="888" font-size="15" fill="#ffffff" font-weight="bold" text-anchor="middle">C</text>
+<text x="986" y="888" font-size="14.5" fill="#b45309" font-weight="normal" text-anchor="start" letter-spacing="0">enquadramento: DePIN com incentivos</text>
+<text x="986" y="904" font-size="14.5" fill="#b45309" font-weight="normal" text-anchor="start" letter-spacing="0">tokenizados → sistemas cyber-físicos</text>
+<rect x="60" y="968" width="1400" height="118" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.6" stroke-dasharray="6 5"/>
+<text x="82" y="998" font-size="17" fill="#b91c1c" font-weight="bold" text-anchor="start" letter-spacing="0">LACUNA ABERTA  ·  as duas provas ainda não compõem</text>
+<text x="82" y="1026" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">a assinatura compromete o envelope integral; a raiz compromete uma projeção de 5 campos</text>
+<text x="82" y="1050" font-size="14.5" fill="#111827" font-weight="normal" text-anchor="start" letter-spacing="0">model_id, dsp_ms, nn_ms, id e a própria assinatura ficam fora da raiz ancorada</text>
+<text x="82" y="1072" font-size="14.5" fill="#6b7280" font-weight="normal" text-anchor="start" letter-spacing="0">consequência: não há cadeia única que ligue um envelope assinado ao conjunto ancorado</text>
+</svg>
