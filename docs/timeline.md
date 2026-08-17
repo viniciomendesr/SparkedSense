@@ -535,3 +535,11 @@ These live outside the repo and are silently lost on re-importing the Edge Impul
 
 - `getSensorReadings` (backend) now does a HEAD count first, then fires all pages of 1000 in parallel with `Promise.all` instead of serial. Reduces 50-page fetch from ~15-18s (which was hitting `WORKER_RESOURCE_LIMIT` HTTP 546 on the Supabase free tier) to ~3s on the wall clock. Frontend historical chart bumped from 10k → 25k rows.
 - Binding constraint at this point is **memory on the free-tier edge runtime** (~256MB), not wall clock. Experimentally, 30k rows works; 50k still trips `WORKER_RESOURCE_LIMIT`. Real fix for sensors with >30k useful historical rows is LTTB downsampling server-side — listed under post-demo pending.
+
+### Phase 10 addendum — device location stops caching (17 Aug 2026)
+
+- `POST /server/device-location` no longer short-circuits on a 24h dedup cache. Every boot resolves the location from the WiFi scan. Rationale and the accepted costs are in [ADR-018](adr/018-remove-device-location-dedup-cache.md), which amends the cache clause of [ADR-009](adr/009-wifi-geolocation-for-sensors.md).
+- The cache keyed on `nft_address`, which does not change when a device moves. Both nodes are development boards carried between lab, office and demo venues, so the dashboard was showing addresses the device had left days earlier. The response said `{"success": true, "cached": true}` — indistinguishable from a fresh lookup unless the caller reads the flag, which none did.
+- Cost accepted for now: one worker request per boot, with no endpoint-level protection against a reboot loop, and `devices.updated_at` churning from centroid jitter. Safe only while location stays out of the anchored envelope — it is not in the ADR-010 reading or the [ADR-017](adr/017-solana-memo-anchoring.md) Merkle leaves, so jitter moves a database row and not an on-chain hash.
+- Follow-up recorded in ADR-018: a `location_bssids` column plus set-similarity comparison, so the worker call is gated on the scan actually changing rather than on elapsed time.
+- Nominatim reverse-geocoding calls from `POST /server/sensors/:id/refresh-location` now carry a contact address in the `User-Agent` (`edge-tracker/1.0 (contatoviniciom@gmail.com)`). Nominatim's usage policy requires an identifiable contact; requests without one are subject to blocking.
