@@ -10,6 +10,9 @@
 #include <vector>
 #include <algorithm>
 #include <DHT.h>  // Instalar: "DHT sensor library" by Adafruit
+// Credenciais de Wi-Fi. Não versionado — copie `secrets.example.h` para
+// `secrets.h` e preencha com a sua rede antes de compilar.
+#include "secrets.h"
 
 // =====================================================
 // --- DHT11 Configuration ---
@@ -28,11 +31,7 @@ unsigned long lastSendTime = 0;
 // =====================================================
 // --- Network Configuration ---
 // =====================================================
-const char* ssid = "firetheboxv2";
-const char* password = "queimeacaixav2";
-
-// static const char* WIFI_SSID     = "MVISIA_2.4GHz"; // Rede WiFi
-// static const char* WIFI_PASSWORD = "mvisia2020"; //Senha da Rede WiFi
+// Wi-Fi: `WIFI_SSID` e `WIFI_PASSWORD` vêm de `secrets.h` (ver includes acima).
 
 // Supabase project anon key (used as Bearer token - allows unauthenticated device access)
 const char* supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqemV4aXZ2ZGR6emR1ZXRta2VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3ODYzMzAsImV4cCI6MjA3NzM2MjMzMH0.hW1SyZKQRzI-ghokMb-F5uccV52vxixE0aH78lNZ1F4";
@@ -399,7 +398,7 @@ void setup() {
   dht.begin();
   Serial.println("🌡️  DHT11 initialized.");
 
-  WiFi.begin(ssid, password);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting WiFi");
   while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
   Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
