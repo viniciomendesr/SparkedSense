@@ -389,6 +389,14 @@ Supabase advisor reported 5 ERROR + 4 WARN; migration 004 drove it to 0 ERROR + 
 
 **Also pending (post-demo):** ESP32-S3 secp256k1 signing pipeline port (removes [ADR-011](adr/011-unsigned-dev-bypass-for-unported-devices.md) bypass), firmware resilience (WiFi reconnection, watchdog, HTTPS timeout — see audit), backend modularization (`index.ts` split), open source documentation, ESP8266 migration from legacy `POST /sensor-data` to native envelope emission (see ADR-010 item 8 + new [ADR-015](adr/015-unify-ingestion-on-adr-010.md)), server-side downsampling (LTTB) for charts past ~30k readings per fetch (free-tier edge memory is the binding constraint, not CPU), Supabase Auth `leaked_password_protection` toggle via dashboard.
 
+### Phase 17 — Dead Python dependency removed (17 Aug 2026)
+
+`requirements.txt` (flask, redis, python-dotenv, gunicorn, all unpinned) was deleted in `4e1be3a`.
+
+It entered the repo in `497cc3c` "Transfer backend" (30 Oct 2025), the bulk import that also brought the Next.js `app/api/` route handlers. [ADR-002](adr/002-unified-backend-edge-functions.md) replaced those handlers with Supabase Edge Functions, but the Python manifest survived that cleanup. No `.py` file exists anywhere in the repo, so the file pinned nothing and described no runnable service. The `redis` references that remain are the TypeScript `ioredis` client, a separate dependency.
+
+Anyone carrying a local `.venv` built from it can delete it; nothing in the project reads from it.
+
 ### Phase 16 — Post-demo refactor: deferred minting + ingestion unification (25 Apr 2026)
 
 The 2026-04-24 Claro demo exposed a structural friction: every physical device had to mint an NFT *before* it could publish, which is wrong as a default for a DePIN platform aiming at commodity hardware. The `unsigned_dev` mode introduced for the demo (ADR-012) turned out to be the right shape for the *general* case, not a one-off patch.
